@@ -6,7 +6,7 @@ The idea of the budgeting application is that a user can create own budget, wher
 
 One example for the use case is that user can create an individual budget and to follow monthly income and expenses to see what is the net result for the month. 
 
-The application will use a ready-to-use categories for income and expenses. This is for the reason that it helps the user to group, sort and analyze transactions.
+The application will use a ready-to-use categories for income and expenses. This is for the reason that it helps the user to group, sort and analyze transactions. The category groups for income and expenses are:
 
 - **Income:** *Salary, Study grant, Miscellanous income*
 - **Expenses:** *Rent, Mortgage, Interest for mortgage, Travel, Groceries, Restaurant & Food,  Miscellanous expenses*
