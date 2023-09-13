@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<link rel="stylesheet" href="/static/main.css">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<head><meta charset="utf-8"></head>
+
+<body>
+<title>Budgeting Application</title>
+<h1>SpendManager</h1>
+
+<p>Welcome to SpendManager, your personal budgeting tool!</p>
+<p>This application is a good solution for individuals and groups. <br> 
+Use it for monthly income and expense analysis or create a budget for your holiday group and follow your spend.</p> 
+
+<p><strong>This application provides functionalities to help you in budgeting, for example, you can easily:</strong></p>
+<ul>
+{% for item in items1 %}
+<li> {{ item }} 
+{% endfor %}
+</ul>
+
+<p>To log in, please fill your Username and Password in below boxes and press "log in".</p>
+
+<form action="/login" method="POST">
+<P> <strong> Username: </strong> <br> 
+<input type="text" name="username" size="30"></p>
+<p> <strong> Password : </strong> <br> 
+<input type="password" name= "password" size="30"></p>
+<input type="submit" value="Log in">
+</form>
+
+<p>Do not have a user account yet? No problem!</p> 
+<p>You can easily create a new user by clicking the <strong>"Register a new user" </strong>button and following the instructions.</p>
+<form action="/register" method="GET">
+<input type="submit" value="Register a new user">
+</form>
+
+<p><strong>Why should I start using SpendManager?</strong></p>
+<ul>
+{% for reason in items2 %}
+<li> {{ reason }} 
+{% endfor %}
+</ul>
+
+</body>
+
+</html>

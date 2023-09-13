@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<link rel="stylesheet" href="/static/main.css">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<head><meta charset="utf-8"></head>
+
+<body>
+
+{% if session.username %}
+<p> You are logged in with a username <strong>{{ session.username }}</strong>. Welcome to your personal page!</p>
+
+<p>In this page you can create your own budget, select to see your own budgets and after selection make changes or delete them.<br>
+</p>
+
+<strong>
+<input type="submit" value="Create a new budget">
+<br><br>
+<input type="submit" value="See all budgets">
+</strong><br>
+
+<p>To return to the main page, press log out button.</p>
+<a href="/logout"><input type="submit" value="Log out"></a>
+{% endif %}
+
+</body>
+
+</html>
