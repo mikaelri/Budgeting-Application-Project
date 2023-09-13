@@ -1,8 +1,8 @@
-**BUDGETING APPLICATION PROJECT**
+**SpendManager - Budgeting application project**
 
 ***Background***
 
-The idea of the budgeting application is that a user can create own budget, where it is possible to track income (i.e. salary, study grant) and expenses (i.e. rent, mortgage, electricity, groceries).
+The idea of SpendManager application is that a user can create own budget, where it is possible to track income (i.e. salary, study grant) and expenses (i.e. rent, mortgage, electricity, groceries).
 
 One example for the use case is that user can create an individual budget and to follow monthly income and expenses to see what is the net result for the month. 
 
