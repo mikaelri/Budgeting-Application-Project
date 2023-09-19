@@ -1,40 +1,34 @@
-<!DOCTYPE html>
+{% extends "layout.html" %}
+{% block content %}
 
-<html lang="en">
-<link rel="stylesheet" href="/static/main.css">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<head><meta charset="utf-8"></head>
-
-<body>
+<h2>Registration page</h2>
 
 <p><strong>Great choice!</strong><p> 
 <p>You are a few steps away from having a personal account and beginning the journey of budgeting!</p>
 <p>Please fill in the details below to create a new user account.</p>
 
+<form action="/register" method="post">
 <b> <strong> Username:</strong><br> 
-<input type="text" name="username" class="input-box"></b>
-<br>
+<input type="text" name="username" id="username" minlength="1" maxlength="25" class="input-box" placeholder="1-25 characters" required></b><br>
 <b> <strong> Password:</strong><br>
-<input type="password" name="password1" id="password1" class="input-box"></b>
-<br>
+<input type="password" name="password1" id="password1" class="input-box" placeholder="1-25 characters" required></b><br>
 <b> <strong> Repeat password:</strong><br>
-<input type="password" name="password2" id="password2" class="input-box"></b>
+<input type="password" name="password2" id="password2" class="input-box" placeholder="1-25 characters" required></b><br>
+
+<select name="role">
+<option value=1> Regular user
+<option value=2> Admin
+</select>
 
 <br>
 
-<input type="radio", name="role" id ="role" class="input-box" value="1"> Regular user
-<input type="radio", name="role" id ="role" class="input-box" value="2"> Admin
+<p>Once you have filled in the details, click <strong>"Confirm registration"</strong>.<br>
+After confirmation, you can click <strong>"Go back to front page"</strong> button and you will be routed to the front page. 
+<p>From the front page you can log in to your account and start using SpendManager!</p>
 
+<input type="submit" value="Confirm registration"></a>
+</form> 
 <br>
 
-<p>Once you have filled in the details, click <strong>"Confirm registration"</strong> and you will be routed to the front page. 
-From the front page you can log in to your account and start using SpendManager!</p>
-
-<input type="submit" value="Confirm registration">
-<br>
-<p>Or</p>
-<input type="submit" value="Go back to front page">
-
-</body>
-
-</html>
+<a href="/"><input type="submit" value="Go back to front page"></a>
+{% endblock %}

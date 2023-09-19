@@ -1,13 +1,5 @@
-<!DOCTYPE html>
-
-<html lang="en">
-<link rel="stylesheet" href="/static/main.css">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<head><meta charset="utf-8"></head>
-
-<body>
-<title>Budgeting Application</title>
-<h1>SpendManager</h1>
+{% extends "layout.html" %}
+{% block content %}
 
 <p>Welcome to SpendManager, your personal budgeting tool!</p>
 <p>This application is a good solution for individuals and groups. <br> 
@@ -43,6 +35,4 @@ Use it for monthly income and expense analysis or create a budget for your holid
 {% endfor %}
 </ul>
 
-</body>
-
-</html>
+{% endblock %}

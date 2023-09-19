@@ -1,11 +1,7 @@
-<!DOCTYPE html>
+{% extends "layout.html" %}
+{% block content %}
 
-<html lang="en">
-<link rel="stylesheet" href="/static/main.css">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<head><meta charset="utf-8"></head>
-
-<body>
+<h2>Your personal page</h2>
 
 {% if session.username %}
 <p> You are logged in with a username <strong>{{ session.username }}</strong>. Welcome to your personal page!</p>
@@ -23,6 +19,4 @@
 <a href="/logout"><input type="submit" value="Log out"></a>
 {% endif %}
 
-</body>
-
-</html>
+{% endblock %}
