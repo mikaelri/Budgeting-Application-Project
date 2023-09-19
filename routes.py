@@ -58,14 +58,14 @@ def login():
     """Function handling the log-in"""
     if request.method == "GET":
         return render_template("login.html")
-    
+
     if request.method == "POST":
         username = request.form["username"]
         password = request.form["password1"]
 
     if not users.login(username, password):
         return render_template("error.html", message="Wrong username or password")
-    return redirect("/")
+    return redirect("/login")
 
 @app.route("/logout")
 def logout():
