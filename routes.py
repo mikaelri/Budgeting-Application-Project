@@ -2,8 +2,10 @@
 from flask import render_template, redirect, request, session, flash, url_for
 from app import app
 import users
+from budgets import new_budget
+from budgets import see_budgets
+from budgets import get_budget_count
 
-#Front page of the application
 @app.route('/')
 def index():
     """Function creating bullet points in front page"""
@@ -53,8 +55,7 @@ def create_user():
     
     return render_template("register.html")
 
-
-@app.route("/login", methods = ["GET", "POST"])
+@app.route("/login", methods=["GET", "POST"])
 def login():
     """Function handling the log-in"""
     if request.method == "GET":
@@ -73,3 +74,37 @@ def logout():
     """Function to log out from your personal pages"""
     users.logout()
     return redirect("/")
+
+@app.route("/budget", methods=["GET", "POST"])
+def create_new_budget():
+    """function handling to create a new budget"""
+    if request.method == "GET":
+        return render_template("budget.html")
+
+    if request.method == "POST":
+        name = request.form["name"]
+        if len(name) < 1 or len(name) > 25:
+            return render_template("error.html", message="Name should be between 1-25 characters.")
+        
+        creator_id = session.get("user_id")
+        budget_count = get_budget_count(creator_id)
+
+        if budget_count >= 5:
+            flash("You have reached the maximum limit of 5 budgets.", "error")
+            return redirect("/budget")
+
+        if new_budget(name, creator_id): 
+            flash("Budget created successfully!", "success")
+            return redirect("/budget")
+        else:
+            return render_template("error.html", message="Failed to create the budget")
+
+    return render_template("budget.html")
+
+@app.route("/mybudgets", methods=["GET"])
+def view_budgets():
+    """function to view all personal budgets"""
+    creator_id = session.get("user_id")
+    budgets = see_budgets(creator_id)
+    return render_template("mybudgets.html", budgets=budgets)
+    
