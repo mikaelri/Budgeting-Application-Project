@@ -1,0 +1,26 @@
+{% extends "layout.html" %}
+{% block content %}
+<h2>Create a new budget</h2>
+<p>You can add a new budget in this page and give it an unique name.</p>
+
+<form action="/budget" method="post">
+<strong> Name of the budget:</strong><br>
+<input type="text" name="name" id="name" minlength="1" maxlength="25" class="input-box" placeholder="1-25 characters" required>
+<input type="submit" value="Create a new budget">
+</form>
+
+<p><a href="/login"><input type="submit" value="Go to my personal page"></a></p>
+
+<p>{% with messages = get_flashed_messages() %}
+    {% if messages %}
+      <div class="flash-messages">
+        {% for message in messages %}
+          <strong><div class="alert alert-{{ message[1] }}">{{ message }}</div></strong>
+        {% endfor %}
+      </div>
+    {% endif %}
+  {% endwith %}
+  </p>
+
+{% endblock %}
+
