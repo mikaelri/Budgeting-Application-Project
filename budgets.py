@@ -10,7 +10,7 @@ def new_budget(name, creator_id):
         db.session.execute(
             sql, {"name": name, "creator_id": creator_id})
         db.session.commit()
-        return True  # Return True on success
+        return True
     except:
         return False
 
