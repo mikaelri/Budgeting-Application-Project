@@ -6,16 +6,16 @@
 {% if session.user_username %}
 <p> You are logged in with a username <strong>{{ session.user_username }}</strong>. Welcome to your personal page!</p>
 
-<p>In this page you can create your own budget, select to see your own budgets and after selection make changes or delete them.<br>
-</p>
+<p>In this page you can create your own budget, select to see your own budgets and after selection make changes or even delete them if you are admin user.</p>
 
-<strong>
-<input type="submit" value="Create a new budget">
-<br><br>
-<input type="submit" value="See all budgets">
-</strong><br>
+<form action="/budget" method="post"></form>
+<a href="/budget"><input type="submit" value="Create a new budget"></a>
+<br>
+<p>Click <strong>"See all budgets"</strong> to select which budget to modify.</p>
+<a href="/mybudgets"><input type="submit" value="See all budgets"></a>
+<br>
 
-<p>To return to the main page, press <strong>"log out"</strong> button.</p>
+<p>To return to the front page, press <strong>"log out"</strong> button.</p>
 <a href="/logout"><input type="submit" value="Log out"></a>
 {% endif %}
 
