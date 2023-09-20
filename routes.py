@@ -1,5 +1,5 @@
 """module app to run the app.py file and flask used to handle the routing of the application"""
-from flask import render_template, redirect, request, session
+from flask import render_template, redirect, request, session, flash, url_for
 from app import app
 import users
 
@@ -45,9 +45,10 @@ def create_user():
         role = request.form["role"]
         if role not in ("1", "2"):
             return render_template("error.html", message="Unknown user type")
-        
         if not users.create_user(username, password1, role):
             return render_template("error.html", message="Registration not succesfull, check username and password")
+        
+        flash("User created succesfully!", "success")
         return redirect("/register")
     
     return render_template("register.html")
