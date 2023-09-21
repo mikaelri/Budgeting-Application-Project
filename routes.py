@@ -98,12 +98,7 @@ def create_new_budget():
 
         creator_id = session.get("user_id")
         budget_count = get_budget_count(creator_id)
-    
-        print(f"Name: {name}")
-        print(f"Income: {income}")
-        print(f"Expense: {expense}")
-        print(f"Message: {message}")
-        print(f"Creator ID: {creator_id}")
+
 
         if budget_count >= 5:
             flash("You have reached the maximum limit of 5 budgets.", "error")
