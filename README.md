@@ -39,7 +39,7 @@ Please not this is not the only use case for the application. The application co
 6. Transactions based on category (See criterias above)
 7. Transactions based on a word
 
-***Installing instructions*** 
+***Installing instructions / how to test the app locally***
 
 **1. Clone this repository to your computer and navigate to the root folder.**
 
