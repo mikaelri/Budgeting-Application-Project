@@ -1,14 +1,21 @@
+DROP TABLE IF EXISTS users CASCADE;
+DROP TABLE IF EXISTS budgets CASCADE;
+DROP TABLE IF EXISTS transactions CASCADE;
+
 CREATE TABLE IF NOT EXISTS users (
     id SERIAL PRIMARY KEY,
     username TEXT, 
     password TEXT,
-    role INTEGER,
+    role INTEGER
 );
 
 CREATE TABLE IF NOT EXISTS budgets (
     id SERIAL PRIMARY KEY,
     creator_id INTEGER REFERENCES users(id),
-    name TEXT
+    name TEXT,
+    income INTEGER,
+    expense INTEGER,
+    message TEXT
 );
 
 CREATE TABLE IF NOT EXISTS transactions (
@@ -17,6 +24,5 @@ CREATE TABLE IF NOT EXISTS transactions (
     income INTEGER,
     expense INTEGER,
     category TEXT,
-    message TEXT,
+    message TEXT
 );
-    

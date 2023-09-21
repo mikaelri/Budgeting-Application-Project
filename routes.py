@@ -84,20 +84,37 @@ def create_new_budget():
     if request.method == "POST":
         name = request.form["name"]
         if len(name) < 1 or len(name) > 25:
-            return render_template("error.html", message="Name should be between 1-25 characters.")
-        
+            flash("Should be between 1-25 characters.")
+            return redirect("/budget")
+
+        income = request.form["income"]
+        expense = request.form["expense"]
+        message = request.form["message"] or ""
+
+        if income == "":
+            income = None
+        if expense == "":
+            expense = None
+
         creator_id = session.get("user_id")
         budget_count = get_budget_count(creator_id)
+    
+        print(f"Name: {name}")
+        print(f"Income: {income}")
+        print(f"Expense: {expense}")
+        print(f"Message: {message}")
+        print(f"Creator ID: {creator_id}")
 
         if budget_count >= 5:
             flash("You have reached the maximum limit of 5 budgets.", "error")
             return redirect("/budget")
 
-        if new_budget(name, creator_id): 
+        if new_budget(name, creator_id, income, expense, message): 
             flash("Budget created successfully!", "success")
             return redirect("/budget")
         else:
-            return render_template("error.html", message="Failed to create the budget")
+            flash("Failed to create the budget, try again!")
+            return redirect("/budget")
 
     return render_template("budget.html")
 

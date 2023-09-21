@@ -1,18 +1,25 @@
 from db import db
 from sqlalchemy import text
 
-def new_budget(name, creator_id):
+def new_budget(name, creator_id, income, expense, message):
     """function for creating a new budget"""
     try:
+        if income == "":
+            income = None
+        if expense == "":
+            expense = None
+
         sql = text(
-            """INSERT INTO budgets (name, creator_id)
-            VALUES(:name, :creator_id)""")
-        db.session.execute(
-            sql, {"name": name, "creator_id": creator_id})
+            """INSERT INTO budgets (name, creator_id, income, expense, message)
+            VALUES(:name, :creator_id, :income, :expense, :message)""")
+        db.session.execute(sql, {"name": name, "creator_id": creator_id, "income": income, 
+                                "expense": expense, "message": message})
         db.session.commit()
         return True
-    except:
+    except Exception as e:
+        print(f"Error creating budget: {str(e)}")
         return False
+    
 
 def see_budgets(creator_id):
     sql = text("SELECT id, name FROM budgets WHERE creator_id=:creator_id")

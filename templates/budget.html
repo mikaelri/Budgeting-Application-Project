@@ -3,13 +3,28 @@
 <h2>Create a new budget</h2>
 <p>You can add a new budget in this page and give it an unique name.</p>
 
+<p>If you do not have any income or expense transactions you can leave the <strong>"income"</strong>, <strong>"expense"</strong> and <strong>"message"</strong> parts blank.
+You don't need to add any + or - signs when inserting income or expense transactions.</p>
+<p>Please note you can create up to 5 budgets.</p>
+
 <form action="/budget" method="post">
-<strong> Name of the budget:</strong><br>
-<input type="text" name="name" id="name" minlength="1" maxlength="25" class="input-box" placeholder="1-25 characters" required>
-<input type="submit" value="Create a new budget">
+
+  <strong>Name of the budget:</strong><br>
+  <input type="text" name="name" id="name" minlength="1" maxlength="25" class="input-box" placeholder="1-25 characters" required><br>
+
+  <strong>Income (+):</strong><br>
+  <input type="number" name="income" id="income" class="input-box"><br>
+
+  <strong>Expense (-):</strong><br>
+  <input type="number" name="expense" id="expense" class="input-box"><br>
+
+  <strong>Message:</strong><br>
+  <input type="text" name="message" id="message" class="input-box"><br>
+
+  <input type="submit" value="Create a new budget">
 </form>
 
-<p><a href="/login"><input type="submit" value="Go to my personal page"></a></p>
+<p><a href="/login"><input type="submit" value="Return to your personal page"></a></p>
 
 <p>{% with messages = get_flashed_messages() %}
     {% if messages %}
