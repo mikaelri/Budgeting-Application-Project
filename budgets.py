@@ -16,8 +16,7 @@ def new_budget(name, creator_id, income, expense, message):
                                 "expense": expense, "message": message})
         db.session.commit()
         return True
-    except Exception as e:
-        print(f"Error creating budget: {str(e)}")
+    except:
         return False
     
 
