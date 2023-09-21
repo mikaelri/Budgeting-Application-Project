@@ -34,7 +34,7 @@ Please not this is not the only use case for the application. The application co
 1. Users
 2. Budgets for the users
 3. Income transactions (+)
-4. Expense transactions (+)
+4. Expense transactions (-)
 5. Individual comments for budgets
 6. Transactions based on category (See criterias above)
 7. Transactions based on a word
