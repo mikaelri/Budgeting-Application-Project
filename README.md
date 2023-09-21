@@ -1,5 +1,8 @@
 **SpendManager - Budgeting application project**
 
+Please note:  **<span style="color: red;">All of the functionalities mentioned below are not yet implemented for the project</span>**
+
+
 ***Background***
 
 The idea of SpendManager application is that a user can create own budget, where it is possible to track income (i.e. salary, study grant) and expenses (i.e. rent, mortgage, electricity, groceries).
@@ -14,24 +17,47 @@ The application will use a ready-to-use categories for income and expenses. This
 Miscellanous expenses could be i.e. Mobile phone bill, membership fees or electricity. The idea is that the user can add any income or expense even if there is not a category for this. 
 If there is no category the user can write a message related to the expense.
 
-Please not this is not the only use case for the application. The application could be used also only for expenses, thus, one other example could be a holiday trip for some group. This application could help to track down the fixed costs already known (or something to add during the trip) such as (flight,hotel, activity costs).
+Please not this is not the only use case for the application. The application could be used also only for expenses, thus, one other example could be a holiday trip for some group. This application could help to track down the fixed costs already known (or something to add during the trip) such as flight,hotel, activity costs.
 
-***Application functionalities***
+***Application functionalities*** **<span style="color: red;"> (to be updated)</span>** 
 
 1. User can log in and out and create a new user account
-2. User can see a list of own individual budgets when logging in and a net result of the budgets (income - expenses) and the time when the budget was previously modified
-3. User can select which budgets to view and/or modify from the front page
+2. User can view a list of own individual budgets after logging in
+3. User can select which budgets to view and/or modify from the list of budgets
 4. User can create a new budget (and at the same time add already new income or expenses, see below)
 5. User can continously add income and expense transactions to the budget with a message and category
 6. User can search income and expenses related to specific word or category (i.e. Salary or Rent)
 7. Admin user can delete existing user accounts and add new admin users
 8. Admin user can see a list of user accounts
 
-***Database tables*** **(to be updated)**
+***Database tables*** **<span style="color: red;"> (to be updated)</span>**
 1. Users
 2. Budgets for the users
 3. Income transactions (+)
-4. Expense transacionts (-)
-5. Income and expense transactions
+4. Expense transactions (+)
+5. Individual comments for budgets
 6. Transactions based on category (See criterias above)
 7. Transactions based on a word
+
+***Installing instructions*** 
+
+**1. Clone this repository to your computer and navigate to the root folder.**
+
+**2. Create .env file to the folder and add these:**
+
+    - DATABASE_URL=<database-local-address> (I have: postgresql:///user)
+    - SECRET_KEY=<your_secret_key>
+  
+**3. Next activate the virtual environment and install the requirements in terminal:**
+  
+    - $ python3 -m venv venv
+    - $ source venv/bin/activate
+    - $ pip install -r ./requirements.txt
+   
+**4. Create the database in psql with command:**
+
+    - $ psql < schema.sql
+  
+**5. Start the application with command:**
+
+    - $ flask run

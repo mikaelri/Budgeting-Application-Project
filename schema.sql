@@ -18,10 +18,17 @@ CREATE TABLE IF NOT EXISTS budgets (
     message TEXT
 );
 
-CREATE TABLE IF NOT EXISTS transactions (
+CREATE TABLE IF NOT EXISTS income (
     id SERIAL PRIMARY KEY,
     budget_id INTEGER REFERENCES budgets,
     income INTEGER,
+    category TEXT,
+    message TEXT
+);
+
+CREATE TABLE IF NOT EXISTS expense (
+    id SERIAL PRIMARY KEY,
+    budget_id INTEGER REFERENCES budgets,
     expense INTEGER,
     category TEXT,
     message TEXT
