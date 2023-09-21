@@ -18,7 +18,6 @@ def new_budget(name, creator_id, income, expense, message):
         return True
     except:
         return False
-    
 
 def see_budgets(creator_id):
     sql = text("SELECT id, name FROM budgets WHERE creator_id=:creator_id")
