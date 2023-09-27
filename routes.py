@@ -81,6 +81,7 @@ def logout():
 def create_new_budget():
     """function handling to create a new budget"""
     if request.method == "GET":
+        flash("", "error")
         return render_template("budget.html")
 
     if request.method == "POST":
@@ -122,11 +123,16 @@ def create_new_budget():
 
     return render_template("budget.html")
 
-@app.route("/mybudgets", methods=["GET"])
+@app.route("/mybudgets", methods=["GET", "POST"])
 def view_budgets():
     """function to view all personal budgets"""
     creator_id = session.get("user_id")
     budgets = see_budgets(creator_id)
+
+    if len(budgets) < 1:
+        return render_template("error_transactions.html", 
+                               message_transactions="No budgets created yet. Please add a budget.")
+        
     return render_template("mybudgets.html", budgets=budgets)
 
 
