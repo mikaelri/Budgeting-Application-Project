@@ -33,7 +33,7 @@ Please not this is not the only use case for the application. The application co
 ***Database tables***
 
 - **Database tables 1,2,3,4 are implemented to schema.sql**
-- **Database tables 6,7 are not yet implemented to schema.sql**
+- **Database tables 5,6,7 are not yet implemented to schema.sql**
 
 1. Users
 2. Budgets for the users
