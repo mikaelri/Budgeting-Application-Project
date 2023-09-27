@@ -18,15 +18,15 @@ Please note this is not the only use case for the application. The application c
 
 ***Application functionalities*** 
 
-- **Functionalities 1,2,3,4 are ready for testing**
+- **Functionalities 1,2,3,4, are ready for testing**
 - **Functionalities 5,6,7,8,9,10 are not ready for testing**
 
 1. User can log in and out and create a new user account
 2. User can view a list of own individual budgets after logging in (only if at least one exists)
 3. User can select which budgets to view and/or modify from the list of budgets
 4. User can create a new budget and at the same time add already new income or expenses, category and message
-5. ~~User can continously add income and expense transactions to the budget with a message and category~~
-6. ~~User can view the net result of the selected budget~~
+5. ~~User can view the net result of the selected budget~~
+6. ~~User can continously add income and expense transactions to the budget with a message and category~~
 7. ~~User can leave comments to selected budgets~~
 8. ~~User can search income and expenses related to specific category (i.e. Salary or Rent)~~
 9.  ~~Admin user can delete existing user accounts and add new admin users~~
@@ -34,14 +34,15 @@ Please note this is not the only use case for the application. The application c
 
 ***Database tables***
 
-- **Database tables 1,2,3 are implemented to schema.sql**
-- **Database tables 4,5,6 are not yet implemented to schema.sql**
+- **Database tables 1,2,3,4, 5are implemented to schema.sql**
+- **Database tables 6 is not yet implemented to schema.sql**
 
 1. Users
 2. Budgets for the users
 3. Transactions
-4. Individual comments for budgets
-5. ~~Transactions based on category (See criterias above)~~
+4. results (income - expense)
+5. Individual comments for budgets
+6. ~~Transactions based on category (See criterias above)~~
 
 ***Installing instructions / how to test the app locally***
 
