@@ -1,8 +1,5 @@
 **SpendManager - Budgeting application project**
 
-Please note:  **<span style="color: red;">All of the functionalities mentioned below are not yet implemented for the project</span>**
-
-
 ***Background***
 
 The idea of SpendManager application is that a user can create own budget, where it is possible to track income (i.e. salary, study grant) and expenses (i.e. rent, mortgage, electricity, groceries).
@@ -19,7 +16,10 @@ If there is no category the user can write a message related to the expense.
 
 Please not this is not the only use case for the application. The application could be used also only for expenses, thus, one other example could be a holiday trip for some group. This application could help to track down the fixed costs already known (or something to add during the trip) such as flight,hotel, activity costs.
 
-***Application functionalities*** **<span style="color: red;"> (to be updated)</span>** 
+***Application functionalities*** 
+
+- **Functionalities 1,2,4 are ready for testing**
+- **Functionalities 3,5,6,7,8 are not ready for testing**
 
 1. User can log in and out and create a new user account
 2. User can view a list of own individual budgets after logging in
@@ -30,7 +30,11 @@ Please not this is not the only use case for the application. The application co
 7. Admin user can delete existing user accounts and add new admin users
 8. Admin user can see a list of user accounts
 
-***Database tables*** **<span style="color: red;"> (to be updated)</span>**
+***Database tables***
+
+- **Database tables 1,2,3,4 are implemented to schema.sql**
+- **Database tables 6,7 are not yet implemented to schema.sql**
+
 1. Users
 2. Budgets for the users
 3. Income transactions (+)
