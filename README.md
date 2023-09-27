@@ -23,12 +23,12 @@ Please not this is not the only use case for the application. The application co
 
 1. User can log in and out and create a new user account
 2. User can view a list of own individual budgets after logging in
-3. User can select which budgets to view and/or modify from the list of budgets
-4. User can create a new budget (and at the same time add already new income or expenses, see below)
-5. User can continously add income and expense transactions to the budget with a message and category
-6. User can search income and expenses related to specific word or category (i.e. Salary or Rent)
-7. Admin user can delete existing user accounts and add new admin users
-8. Admin user can see a list of user accounts
+3. ~~User can select which budgets to view and/or modify from the list of budgets~~
+4. User can create a new budget and at the same time add already new income or expenses, category and message
+5. ~~User can continously add income and expense transactions to the budget with a message and category~~
+6. ~~User can search income and expenses related to specific word or category (i.e. Salary or Rent)~~
+7. ~~Admin user can delete existing user accounts and add new admin users~~
+8. ~~Admin user can see a list of user accounts~~
 
 ***Database tables***
 
@@ -39,9 +39,9 @@ Please not this is not the only use case for the application. The application co
 2. Budgets for the users
 3. Income transactions (+)
 4. Expense transactions (-)
-5. Individual comments for budgets
-6. Transactions based on category (See criterias above)
-7. Transactions based on a word
+5. ~~Individual comments for budgets~~
+6. ~~Transactions based on category (See criterias above)~~
+7. ~~Transactions based on a word~~
 
 ***Installing instructions / how to test the app locally***
 
