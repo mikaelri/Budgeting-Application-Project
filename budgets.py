@@ -1,19 +1,50 @@
 from db import db
 from sqlalchemy import text
 
-def new_budget(name, creator_id, income, expense, message):
+def new_budget(name, creator_id, income, expense, income_category, expense_category, message):
     """function for creating a new budget"""
     try:
         if income == "":
             income = None
         if expense == "":
             expense = None
+        if income_category == "":
+            income_category = None
+        if expense_category == "":
+            expense_category = None
 
         sql = text(
-            """INSERT INTO budgets (name, creator_id, income, expense, message)
-            VALUES(:name, :creator_id, :income, :expense, :message)""")
+            """INSERT INTO budgets (name, creator_id, income, expense, 
+            income_category, expense_category, message)
+            VALUES(:name, :creator_id, :income, :expense, 
+            :income_category, :expense_category, :message)""")
         db.session.execute(sql, {"name": name, "creator_id": creator_id, "income": income, 
-                                "expense": expense, "message": message})
+                                "expense": expense, "income_category": income_category,
+                                "expense_category": expense_category, "message": message})
+        db.session.commit()
+        return True
+    except:
+        return False
+    
+def add_transaction(income, expense, income_category, expense_category, message):
+    """function to add transactions continously to selected budget"""
+
+    try:
+        if income == "":
+            income = None
+        if expense == "":
+            expense = None
+        if income_category == "":
+            income_category = None
+        if expense_category == "":
+            expense_category = None
+        
+        sql = text(
+            """"INSERT INTO budgets (income, expense, income_category, expense_category, message)
+            VALUES(:income, :expense, :income_category, :expense_category, :message)""")
+        db.session.execute(sql,{"income":income, "expense":expense, 
+                                "income_category":income_category, 
+                                "expense_category":expense_category, "message":message})
         db.session.commit()
         return True
     except:
@@ -32,3 +63,10 @@ def get_budget_count(creator_id):
     result = db.session.execute(sql, {"creator_id": creator_id})
     count = result.scalar()
     return count
+
+def get_budget_id(budget_id):
+    """function to get the budget id's. Used in select_budget"""
+    sql = text("SELECT id, name FROM budgets WHERE id=:budget_id")
+    result = db.session.execute(sql, {"budget_id":budget_id})
+    budget = result.fetchone()
+    return budget

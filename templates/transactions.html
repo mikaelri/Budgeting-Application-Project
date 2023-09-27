@@ -1,0 +1,52 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<h2>Add transactions</h2>
+
+{% if selected_budget %}
+
+<p> <strong>Selected budget:</strong> {{ selected_budget.name }}</p>
+{% else %}
+  <p>No budget selected.</p>
+{% endif %}
+
+<p>Below you can add transactions to your <strong>{{ selected_budget.name }}</strong> budget. Once ready, click <strong>"Add transaction(s)"</strong>.</p>
+
+<form action="/transactions" method="post">
+  
+    <strong>Income (+)</strong><br>
+    <input type="number" name="income" id="income" class="input-box"><br>
+  
+    <strong>Income category</strong>
+    <br><select name="income_category" id="income_category">
+    <option value="" > 
+    <option value="salary"> salary
+    <option value="grant"> study grant
+    <option value="miscellanous_inc"> miscellanous income
+    </select>
+    <br><br>
+  
+    <strong>Expense (-):</strong><br>
+    <input type="number" name="expense" id="expense" class="input-box"><br>
+  
+    <strong>Expense category</strong><br>
+    <select name="expense_category" id="expense_category">
+    <option value="" > 
+    <option value="rent"> rent
+    <option value="mortgage"> mortgage
+    <option value="travel"> travel
+    <option value="groceries"> groceries
+    <option value="food"> food 
+    <option value="miscellanous_exp"> miscellanous expense
+    </select>
+    <br><br>
+  
+    <strong>Message:</strong><br>
+    <input type="text" name="message" id="message" class="input-box"><br>
+  
+    <input type="submit" value="Add transaction(s)">
+  </form><br>
+
+<a href="/mybudgets"><input type="submit"value="Back to My Budgets"></a>
+
+{% endblock %}
