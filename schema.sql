@@ -1,7 +1,6 @@
 DROP TABLE IF EXISTS users CASCADE;
 DROP TABLE IF EXISTS budgets CASCADE;
-DROP TABLE IF EXISTS income CASCADE;
-DROP TABLE IF EXISTS expense CASCADE;
+DROP TABLE IF EXISTS transactions CASCADE;
 
 CREATE TABLE IF NOT EXISTS users (
     id SERIAL PRIMARY KEY,
@@ -27,14 +26,6 @@ CREATE TABLE IF NOT EXISTS transactions (
     income INTEGER,
     expense INTEGER,
     income_category TEXT,
-    expense_category TEXT,
-    message TEXT
-);
-
-CREATE TABLE IF NOT EXISTS expense (
-    id SERIAL PRIMARY KEY,
-    budget_id INTEGER REFERENCES budgets(id),
-    expense INTEGER,
     expense_category TEXT,
     message TEXT
 );
