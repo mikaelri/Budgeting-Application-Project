@@ -28,4 +28,8 @@ CREATE TABLE IF NOT EXISTS transactions (
     income_category TEXT,
     expense_category TEXT,
     message TEXT
-);
+
+CREATE TABLE IF NOT EXISTS comments (
+    id SERIAL PRIMARY KEY,
+    comment_id INTEGER REFERENCES budgets(id),
+    comment TEXT
