@@ -49,8 +49,30 @@ def add_transaction(income, expense, income_category, expense_category, message)
         return True
     except:
         return False
+    
+def calculate_net_result():
+    """function to calculate the net result and inserting it to results table"""
+    try:
+        sql = text(
+        """INSERT INTO results (budget_id, result)
+        SELECT b.id AS budget_id, SUM(b.income - b.expense) AS net_result
+        FROM budgets AS b
+        GROUP BY b.id""")
+        db.session.execute(sql)
+        db.session.commit()
+        return True
+    except:
+        return False
 
-def see_budgets(creator_id):
+def get_net_result(budget_id):
+    """function to retrieve the net result for a selected budget"""
+    
+    sql = text("SELECT result FROM results WHERE budget_id=:budget_id")
+    result = db.session.execute(sql, {"budget_id":budget_id}).scalar()
+    
+    return result
+
+def see_budgets(creator_id): 
     """function to view budgets"""
     sql = text("SELECT id, name FROM budgets WHERE creator_id=:creator_id")
     result = db.session.execute(sql, {"creator_id":creator_id})

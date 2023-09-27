@@ -12,6 +12,13 @@
 
 <p>Below you can add transactions to your <strong>{{ selected_budget.name }}</strong> budget. Once ready, click <strong>"Add transaction(s)"</strong>.</p>
 
+{% if net_result is not none %}
+    <p><strong>Net result:</strong> {{ net_result }}</p>
+{% else %}
+    <p>{{ message }}</p>
+{% endif %}
+
+
 <form action="/transactions" method="post">
   
     <strong>Income (+)</strong><br>

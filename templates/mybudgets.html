@@ -3,7 +3,7 @@
 
 <h2>Your Budgets</h2>
 
-<p>Select in which budget you want to add income or expense transactions and click <strong>"Add transactions".</strong></p>
+<p>Select in which budget you want to add income or expense transactions and click <strong>"Add transactions and see net result".</strong></p>
 <form action="/transactions" method="GET">
   <label for="budgetSelect">Select a budget:</label>
   <select name="budget_id" id="budgetSelect">
@@ -11,7 +11,7 @@
       <option value="{{ budget.id }}">{{ budget.name }}</option>
     {% endfor %}
   </select>
-  <input type="submit" value="Add transactions">
+  <input type="submit" value="Add transactions and see net result">
 </form>
 
 

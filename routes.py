@@ -7,6 +7,8 @@ from budgets import see_budgets
 from budgets import get_budget_count
 from budgets import get_budget_id
 from budgets import add_transaction
+from budgets import get_net_result
+from budgets import calculate_net_result
 
 @app.route('/')
 def index():
@@ -136,12 +138,23 @@ def view_budgets():
     return render_template("mybudgets.html", budgets=budgets)
 
 
-@app.route("/transactions", methods=["GET"])
+@app.route("/transactions", methods=["GET", "POST"])
 def select_budget():
     """function to select the budget where user wants to add income or expense transactions"""
     budget_id = request.args.get("budget_id")
     selected_budget = get_budget_id(budget_id)
-    
+
     return render_template("transactions.html", selected_budget=selected_budget)
 
+def see_net_result(budget_id):
+    """function to see the net result of the selected budget"""
+
+    calculate_net_result(budget_id)
+
+    net_result = get_net_result(budget_id)
+    if net_result is not None:
+        return render_template("transactions.html", net_result=net_result)
+    else:
+        return render_template("error_transactions.html", 
+                               message_transactions="No budgets created yet. Please add a budget.")
 
