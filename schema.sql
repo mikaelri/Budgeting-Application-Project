@@ -20,7 +20,7 @@ CREATE TABLE IF NOT EXISTS budgets (
     income_category TEXT,
     expense_category TEXT,
     message TEXT,
-    result
+    result INTEGER
 );
 
 CREATE TABLE IF NOT EXISTS transactions (
