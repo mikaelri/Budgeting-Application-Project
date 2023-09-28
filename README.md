@@ -45,24 +45,37 @@ Please note this is not the only use case for the application. The application c
 6. ~~Transactions based on category (See criterias above)~~
 
 ***Installing instructions / how to test the app locally***
-
+```
+Prerequisites: Python 3.10.12 and PostgreSQL.
+```
 **1. Clone this repository to your computer and navigate to the root folder.**
 
 **2. Create .env file to the folder and add these:**
+```
+DATABASE_URL=<database-local-address> (I have: postgresql:///user)
+```
+```
+SECRET_KEY=<your_secret_key>
+```
 
-    - DATABASE_URL=<database-local-address> (I have: postgresql:///user)
-    - SECRET_KEY=<your_secret_key>
-  
 **3. Next activate the virtual environment and install the requirements in terminal:**
-  
-    - $ python3 -m venv venv
-    - $ source venv/bin/activate
-    - $ pip install -r ./requirements.txt
-   
-**4. Create the database in psql with command:**
+```
+python3 -m venv venv
+```
+```
+source venv/bin/activate
+```
+```
+pip install -r ./requirements.txt
+```
 
-    - $ psql < schema.sql
-  
+**4. Create the database in psql with command:**
+```
+psql < schema.sql
+```
+
 **5. Start the application with command:**
 
-    - $ flask run
+```
+flask run
+```
