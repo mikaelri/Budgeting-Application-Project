@@ -6,18 +6,9 @@
 {% if selected_budget %}
 
 <p> <strong>Selected budget:</strong> {{ selected_budget.name }}</p>
-{% else %}
-  <p>No budget selected.</p>
 {% endif %}
 
 <p>Below you can add transactions to your <strong>{{ selected_budget.name }}</strong> budget. Once ready, click <strong>"Add transaction(s)"</strong>.</p>
-
-{% if net_result is not none %}
-    <p><strong>Net result:</strong> {{ net_result }}</p>
-{% else %}
-    <p>{{ message }}</p>
-{% endif %}
-
 
 <form action="/transactions" method="post">
   
@@ -52,6 +43,17 @@
     <input type="text" name="message" id="message" class="input-box"><br>
   
     <input type="submit" value="Add transaction(s)">
+  
+    <p>{% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <div class="flash-messages">
+          {% for message in messages %}
+            <strong><div class="alert alert-{{ message[1] }}">{{ message }}</div></strong>
+          {% endfor %}
+        </div>
+      {% endif %}
+    {% endwith %}
+    </p>
   </form>
 
 <p>Or return to your budgets</p>
