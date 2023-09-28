@@ -40,6 +40,17 @@ def create_user(username, password, role):
     
     return login(username, password)
 
+def user_exists(username):
+    """function to check if username exists"""
+    sql = text("SELECT username from users WHERE username=:username")
+    result = db.session.execute(sql, {"username": username})
+    existing_user = result.fetchone()
+
+    if existing_user:
+        return True
+    else:
+        return False
+
 def user_id():
     return session.get("user_id", 0)
 
