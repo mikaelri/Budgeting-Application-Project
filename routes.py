@@ -6,9 +6,9 @@ from budgets import new_budget
 from budgets import see_budgets
 from budgets import get_budget_count
 from budgets import get_budget_id
-from budgets import add_transaction
-from budgets import get_net_result
-from budgets import calculate_net_result
+from userbudgets import add_transaction
+from userbudgets import get_net_result
+from userbudgets import calculate_net_result
 from budgets import budget_exists
 
 @app.route('/')
@@ -146,14 +146,6 @@ def view_budgets():
         
     return render_template("mybudgets.html", budgets=budgets)
 
-@app.route("/transactions", methods=["GET", "POST"])
-def select_budget():
-    """function to select the budget where user wants to add income or expense transactions"""
-    budget_id = request.args.get("budget_id")
-    selected_budget = get_budget_id(budget_id)
-
-    return render_template("transactions.html", selected_budget=selected_budget)
-
 @app.route("/netresult", methods=["GET", "POST"])
 def view_net_result():
     """function to route to net result view"""
@@ -162,8 +154,14 @@ def view_net_result():
 
     return render_template("netresult.html", selected_budget=selected_budget)
 
-
 @app.route("/transactions", methods=["GET", "POST"])
+def select_budget():
+    """function to select the budget where user wants to add income or expense transactions"""
+    budget_id = request.args.get("budget_id")
+    selected_budget = get_budget_id(budget_id)
+
+    return render_template("transactions.html", selected_budget=selected_budget)
+
 def add_new_transactions():
     """function to add continously transactions to a selected budget"""
 
@@ -176,6 +174,7 @@ def add_new_transactions():
         income_category = request.form["income_category"]
         expense_category = request.form["expense_category"]
         message = request.form["message"] or ""
+        budget_id = session.get("budget_id")
 
         if income == "":
             income = None
@@ -186,7 +185,7 @@ def add_new_transactions():
         if expense_category == "":
             expense_category = None
 
-        if add_transaction(income, expense, income_category, expense_category, message):
+        if add_transaction(budget_id, income, expense, income_category, expense_category, message):
             flash("Transaction added succesfully!", "success")
             return redirect("/transactions")
         else:
