@@ -8,11 +8,13 @@
 <p> <strong>Selected budget:</strong> {{ selected_budget.name }}</p>
 {% endif %}
 
-<p>Below you can add transactions to your <strong>{{ selected_budget.name }}</strong> budget. Once ready, click <strong>"Add transaction(s)"</strong>.</p>
+<p>Below you can add transactions to your <strong>{{ selected_budget.name }}</strong> budget.</p>
+<p>You don't need to add any + or - signs when inserting income or expense transactions.</p>
+<p>Once ready, click <strong>"Add transaction(s)"</strong>.</p>
 
 <form action="/transactions" method="post">
   
-    <strong>Income (+)</strong><br>
+    <strong>Income</strong><br>
     <input type="number" name="income" id="income" class="input-box"><br>
   
     <strong>Income category</strong>
@@ -24,7 +26,7 @@
     </select>
     <br><br>
   
-    <strong>Expense (-):</strong><br>
+    <strong>Expense:</strong><br>
     <input type="number" name="expense" id="expense" class="input-box"><br>
   
     <strong>Expense category</strong><br>
