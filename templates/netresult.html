@@ -4,13 +4,12 @@
 <h2>Net result</h2>
 
 {% if selected_budget %}
-
-<p> Net result for selected budget <strong>{{ selected_budget.name }}</strong>: </p>
+<p> Net result for selected budget <strong>{{ selected_budget.name }}</strong>: {{ net_result }}</p>
 {% else %}
   <p>No budget selected.</p>
 {% endif %}
 
-<p>Return to your budgets:</p>
+<p>Return to your budgets.</p>
 <a href="/mybudgets"><input type="submit"value="Back to My Budgets"></a>
 
 {% endblock %}

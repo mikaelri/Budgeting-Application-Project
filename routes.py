@@ -130,7 +130,8 @@ def select_budget():
     budget_id = request.args.get("budget_id")
     selected_budget = budgets.get_budget_id(budget_id)
 
-    return render_template("transactions.html", selected_budget=selected_budget, budget_id=budget_id)
+    return render_template("transactions.html", selected_budget=selected_budget, 
+                                                budget_id=budget_id)
 
 @app.route("/transactions/<int:budget_id>", methods=["GET", "POST"])
 def add_new_transactions(budget_id):
@@ -140,25 +141,35 @@ def add_new_transactions(budget_id):
         return render_template("transactions.html")
 
     if request.method == "POST":
-        income = request.form.get("income", None)
-        expense = request.form.get("expense", None)
-        income_category = request.form.get("income_category", None)
-        expense_category = request.form.get("expense_category", None)
-        message = request.form.get("message", "")   
+        income = request.form.get("income")
+        expense = request.form.get("expense")
+        income_category = request.form.get("income_category")
+        expense_category = request.form.get("expense_category")
+        message = request.form.get("message")   
 
-        if userbudgets.add_transaction(budget_id, income, expense, income_category, expense_category, message):
+        if userbudgets.add_transaction(budget_id, income, expense, income_category, 
+                                       expense_category, message):
             flash("Transaction added succesfully!", "success")
-            return redirect(f"/transactions?budget_id={budget_id}")
+            return redirect("/transactions")
         else:
             flash("Failed to add transactions to the budget, try again!")
             return redirect("/transactions")
 
     return render_template("transactions.html", budget_id=budget_id)
 
-@app.route("/netresult", methods=["GET", "POST"])
+@app.route("/netresult", methods=["GET"])
 def view_net_result():
-    """function to route to net result view"""
+    """function to show the net result for selected budget"""
     budget_id = request.args.get("budget_id")
-    selected_budget = budgets.get_budget_id(budget_id)
+        
+    budget_id = int(budget_id)
+    select_budget = budgets.get_budget_id(budget_id)
+    
+    net_result = userbudgets.calculate_net_result(budget_id)
 
-    return render_template("netresult.html", selected_budget=selected_budget)
+    # add the net result to the budget
+    return render_template("netresult.html", 
+                           selected_budget=select_budget, 
+                           budget_id=budget_id,
+                           net_result=net_result)
+

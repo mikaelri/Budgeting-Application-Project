@@ -30,27 +30,58 @@ def add_transaction(budget_id: int, income: int, expense:int, income_category: s
     except:
         return False
 
-def calculate_net_result():
-    """function to calculate the net result and updating it to budgets table"""
+def calculate_net_result(budget_id: int):
+    """function to calculate the net result and inserting it to results table"""
+
     try:
-        sql_update_result = text(
-            """
-            UPDATE budgets
-            SET result = SUM(income, 0) - COALESCE(expense, 0);
-            """
-        )
-        db.session.execute(sql_update_result)
+    # First get the total of income and expense from transactions table
+        sql_sum_income = text(""" 
+        SELECT budget_id, sum(income) AS total_income from transactions where budget_id=:budget_id
+        GROUP BY budget_id""")
+        
+        sql_sum_expense = text(""" 
+        SELECT budget_id, sum(expense) AS total_expense from transactions where budget_id=:budget_id
+        GROUP BY budget_id""")
+
+        income_result = db.session.execute(sql_sum_income, {"budget_id": budget_id}).first()
+        expense_result = db.session.execute(sql_sum_expense, {"budget_id": budget_id}).first()
+
+        total_income = income_result.total_income if income_result else 0
+        total_expense = expense_result.total_expense if expense_result else 0
+
+        net_result = total_income - total_expense
+
+        sql_check_existing = text("SELECT budget_id FROM results WHERE budget_id=:budget_id")
+        existing_result = db.session.execute(sql_check_existing, {"budget_id": budget_id}).first()
+
+        # Second, update or add the result to results table
+        if existing_result:
+            # Update records if there is already data stored
+            sql_update = text("""
+            UPDATE results SET total_income=:total_income, total_expense=:total_expense, 
+            net_result=:net_result WHERE budget_id=:budget_id""")
+
+            db.session.execute(sql_update, {
+                "total_income": total_income, 
+                "total_expense": total_expense, 
+                "net_result": net_result, 
+                "budget_id": budget_id
+            })
+        else:
+            # Add new record if there is no data stored
+            sql_insert = text("""
+            INSERT INTO results (budget_id, total_income, total_expense, net_result) 
+            VALUES (:budget_id, :total_income, :total_expense, :net_result)""")
+            
+            db.session.execute(sql_insert, {
+                "budget_id": budget_id, 
+                "total_income": total_income,
+                "total_expense": total_expense, 
+                "net_result": net_result
+            })
+
         db.session.commit()
 
-        return True
-    except Exception as e:
-        print(e)
-        return False
-
-def get_net_result(budget_id):
-    """function to retrieve the net result for a selected budget"""
-    
-    sql = text("SELECT result FROM results WHERE budget_id=:budget_id")
-    result = db.session.execute(sql, {"budget_id":budget_id}).scalar()
-    
-    return result
+        return net_result  #returns the net result so routes.py can handle it to html
+    except:
+        False
