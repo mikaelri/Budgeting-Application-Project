@@ -1,18 +1,16 @@
 #module to handle users budget functions from the user view
 from db import db
 from sqlalchemy import text
+import Services.budgetservice as budgetservice
 
-def add_transaction(budget_id, income, expense, income_category, expense_category, message):
+
+def add_transaction(budget_id: int, income: int, expense:int, income_category: str, 
+                    expense_category: str, message: str):
     """function to add transactions continuously to selected budget"""
+
     try:
-        if income == "":
-            income = None
-        if expense == "":
-            expense = None
-        if income_category == "":
-            income_category = None
-        if expense_category == "":
-            expense_category = None
+        income, expense, income_category, expense_category, message = budgetservice.empty(
+        income, expense, income_category, expense_category, message)
         
         sql = text(
             """INSERT INTO transactions (budget_id, income, expense, 
