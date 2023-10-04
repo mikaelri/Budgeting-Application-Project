@@ -5,7 +5,7 @@ from flask import abort, request, session
 from sqlalchemy import text
 from werkzeug.security import check_password_hash, generate_password_hash
 
-def login(username, password):
+def login(username: str, password: str):
     """login function for database"""
     sql = text("SELECT password, id, role FROM users WHERE username=:username")
     result = db.session.execute(sql, {"username":username})
@@ -26,7 +26,7 @@ def logout():
     del session["user_username"]
     del session["user_role"]
 
-def create_user(username, password, role):
+def create_user(username: str, password: str, role: int):
     """function for registering a new user to database"""
     hash_value = generate_password_hash(password)
     try:
@@ -40,7 +40,7 @@ def create_user(username, password, role):
     
     return login(username, password)
 
-def user_exists(username):
+def user_exists(username: str):
     """function to check if username exists"""
     sql = text("SELECT username from users WHERE username=:username")
     result = db.session.execute(sql, {"username": username})
@@ -54,7 +54,7 @@ def user_exists(username):
 def user_id():
     return session.get("user_id", 0)
 
-def require_role(role):
+def require_role(role: int):
     if role > session.get("user_role", 0):
         abort(403)
 
