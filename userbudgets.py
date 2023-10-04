@@ -1,7 +1,7 @@
 #module to handle users budget functions from the user view
 from db import db
 from sqlalchemy import text
-import Services.budgetservice as budgetservice
+import services.budgetservice as budgetservice
 
 
 def add_transaction(budget_id: int, income: int, expense:int, income_category: str, 
