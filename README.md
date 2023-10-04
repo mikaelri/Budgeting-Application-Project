@@ -18,8 +18,8 @@ Please note this is not the only use case for the application. The application c
 
 ***Application functionalities*** 
 
-- **Functionalities 1,2,3,4, are ready for testing**
-- **Functionalities 5,6,7,8,9,10 are not ready for testing**
+- **Functionalities 1,2,3,4,5 are ready for testing**
+- **Functionalities 6,7,8,9,10 are not ready for testing**
 
 1. User can log in and out and create a new user account
 2. User can view a list of own individual budgets after logging in (only if at least one exists)
