@@ -14,13 +14,7 @@ CREATE TABLE IF NOT EXISTS users (
 CREATE TABLE IF NOT EXISTS budgets (
     id SERIAL PRIMARY KEY,
     creator_id INTEGER REFERENCES users(id),
-    name TEXT,
-    income INTEGER,
-    expense INTEGER,
-    income_category TEXT,
-    expense_category TEXT,
-    message TEXT,
-    result INTEGER
+    name TEXT
 );
 
 CREATE TABLE IF NOT EXISTS transactions (
@@ -35,7 +29,7 @@ CREATE TABLE IF NOT EXISTS transactions (
 
 CREATE TABLE IF NOT EXISTS results (
     id SERIAL PRIMARY KEY,
-    budget_id INTEGER REFERENCES budgets(id),
+    budget_id INTEGER REFERENCES budgets,
     result INTEGER
 );
 
