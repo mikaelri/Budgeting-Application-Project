@@ -1,4 +1,5 @@
 def empty(income, expense, income_category, expense_category, message):
+    """function to perform if statements for userbudgets"""
     income = 0 if income in ["", " "] else income
     expense = 0 if expense in ["", " "] else expense
     income_category = "Not selected" if income_category in ["", " "] else income_category
