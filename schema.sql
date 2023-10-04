@@ -28,8 +28,7 @@ CREATE TABLE IF NOT EXISTS transactions (
 );
 
 CREATE TABLE IF NOT EXISTS results (
-    id SERIAL PRIMARY KEY,
-    budget_id INTEGER REFERENCES budgets(id),
+    budget_id INTEGER PRIMARY KEY REFERENCES budgets(id),
     total_income INTEGER,
     total_expense INTEGER,
     net_result INTEGER
