@@ -12,8 +12,10 @@
 <p>You don't need to add any + or - signs when inserting income or expense transactions.</p>
 <p>Once ready, click <strong>"Add transaction(s)"</strong>.</p>
 
-<form action="/transactions" method="post">
-  
+<form action="/transactions/{{ budget_id }}" method="post">
+
+  <input type="hidden" name="budget_id" value="{{ budget_id }}">
+
     <strong>Income</strong><br>
     <input type="number" name="income" id="income" class="input-box"><br>
   

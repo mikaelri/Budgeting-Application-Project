@@ -4,44 +4,12 @@
 <h2>Create a new budget</h2>
 <p>You can add a new budget in this page and give it an unique name.</p>
 
-<p>If you do not have any income or expense transactions you can leave the <strong>"income"</strong>, <strong>"expense"</strong>, <strong>"message"</strong> and <strong>"income and expense category"</strong> parts blank.
-You don't need to add any + or - signs when inserting income or expense transactions.</p>
 <p>Please note you can create up to 5 budgets.</p>
 
 <form action="/budget" method="post">
 
   <strong>Name of the budget:</strong><br>
   <input type="text" name="name" id="name" minlength="1" maxlength="25" class="input-box" placeholder="1-25 characters" required><br>
-
-  <strong>Income</strong><br>
-  <input type="number" name="income" id="income" class="input-box"><br>
-
-  <strong>Income category</strong>
-  <br><select name="income_category" id="income_category">
-  <option value="" > 
-  <option value="salary"> salary
-  <option value="grant"> study grant
-  <option value="miscellanous_inc"> miscellanous income
-  </select>
-  <br><br>
-
-  <strong>Expense:</strong><br>
-  <input type="number" name="expense" id="expense" class="input-box"><br>
-
-  <strong>Expense category</strong><br>
-  <select name="expense_category" id="expense_category">
-  <option value="" > 
-  <option value="rent"> rent
-  <option value="mortgage"> mortgage
-  <option value="travel"> travel
-  <option value="groceries"> groceries
-  <option value="food"> food 
-  <option value="miscellanous_exp"> miscellanous expense
-  </select>
-  <br><br>
-
-  <strong>Message:</strong><br>
-  <input type="text" name="message" id="message" class="input-box"><br>
 
   <input type="submit" value="Create a new budget">
 
