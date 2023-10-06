@@ -5,5 +5,21 @@
 
 <p>This page will show you a list of all users, below.</p>
 
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Username</th>
+            <th>Role</th>
+        </tr>
+        {% for user in users %}
+        <tr>
+            <th>{{ user.id }}</th>
+            <th>{{ user.username }}</th>
+            <th>{{ user.role }}</th>
+        </tr>
+        {% endfor %}
+    </table>
+    
+</form>
 
 {% endblock %}

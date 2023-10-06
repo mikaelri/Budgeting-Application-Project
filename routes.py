@@ -171,19 +171,11 @@ def userlist():
     if request.method == "GET":
         user_id = session.get("user_id")
         user_role = users.get_user_role(user_id)
-        if user_role:
-            session["role"] = user_role
-            if user_role == 2:
-                return render_template("userlist.html")
-            
-            
-            else:
-                flash("Access denied, only for admin users")
-                return redirect("/login")
-            
-def view_userlist():
-    if request.method == "GET":
-        pass
-
+        if user_role and user_role == 2:
+            all_users = users.get_user_list()
+            return render_template("userlist.html", users=all_users)
+        else:
+            flash("Access denied, only for admin users")
+            return redirect("/login")
 
 

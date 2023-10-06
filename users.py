@@ -74,10 +74,6 @@ def get_user_role(user_id: int):
 def get_user_list():
     """function to get the list of all users and their roles"""
     sql = text("SELECT id, username, role FROM users")
-    result = db.session.execute(sql, {None})
-    user_list = result.fetchall()
-    if user_list:
-        return True
-    else:
-        return False
+    result = db.session.execute(sql).fetchall()
+    return result
     
