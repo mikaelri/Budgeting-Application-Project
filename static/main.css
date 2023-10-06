@@ -9,10 +9,10 @@ table {
     width: 80%;
 }
 
-td, th {
+table, td, th {
     border-style: solid;
     border-color: black;
-    border-width: 1px;
+    border-width: 2px;
 }
 
 .input-box {
