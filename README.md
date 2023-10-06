@@ -18,8 +18,8 @@ Please note this is not the only use case for the application. The application c
 
 ***Application functionalities*** 
 
-- **Functionalities 1,2,3,4,5,6 are ready for testing**
-- **Functionalities 7,8,9,10 are not ready for testing**
+- **Functionalities 1,2,3,4,5,6,7 are ready for testing**
+- **Functionalities 8,9,10 are not ready for testing**
 
 1. User can log in and out and create a new user account
 2. User can view a list of own individual budgets after logging in (only if at least one exists)
@@ -27,10 +27,10 @@ Please note this is not the only use case for the application. The application c
 4. User can create a new budget and add a name for it
 5. User can continously add income and expense transactions to selected budget with a message and category
 6. User can view the net result of the selected budget
-7. ~~User can leave comments to selected budgets~~
-8. ~~User can search income and expenses related to specific category (i.e. Salary or Rent)~~
-9. ~~Admin user can delete existing budgets~~
-10. ~~Admin user can see a list of user accounts~~
+7. Admin user can see a list of user accounts
+8. ~~Admin user can delete existing budgets~~
+9. ~~User can leave comments to selected budgets~~
+10.~~User can search income and expenses related to specific category (i.e. Salary or Rent)~~
 
 ***Database tables***
 
