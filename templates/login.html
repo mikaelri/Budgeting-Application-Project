@@ -5,8 +5,19 @@
 
 {% if session.user_username %}
 <p> You are logged in with a username <strong>{{ session.user_username }}</strong>. Welcome to your personal page!</p>
+{% endif %}
 
-<p>In this page you can create your own budget, select to see your own budgets and after selection make changes or even delete them if you are admin user.</p>
+{% if session.role %}
+<p>Your role is: <strong>{{ session.role }}</strong></p>
+
+<h2>Role definitions:</h2>
+<ul>
+    <li><strong>Role 1:</strong> Regular user
+    <li><strong>Role 2:</strong> Admin user
+</ul>
+
+<p>In this page you can create your own budget, select to see your own budgets and after selection make changes or even delete them if you are admin user. 
+    Admin users can also see a list of all users.</p>
 
 <form action="/budget" method="post"></form>
 <a href="/budget"><input type="submit" value="Create a new budget"></a>
@@ -15,8 +26,26 @@
 <a href="/mybudgets"><input type="submit" value="See all budgets"></a>
 <br>
 
+<p>Click <strong>"See a list of users"</strong> to see all of the users and their roles.</p>
+<a href="/userlist"><input type="submit" value="See a list of all users"></a>
+<br>
+
 <p>To return to the front page, press <strong>"log out"</strong> button.</p>
 <a href="/logout"><input type="submit" value="Log out"></a>
+
+<form>
+<p>{% with messages = get_flashed_messages() %}
+    {% if messages %}
+      <div class="flash-messages">
+        {% for message in messages %}
+          <strong><div class="alert alert-{{ message[1] }}">{{ message }}</div></strong>
+        {% endfor %}
+      </div>
+    {% endif %}
+  {% endwith %}
+  </p>
+</form>
+
 {% endif %}
 
 {% endblock %}
