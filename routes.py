@@ -7,20 +7,8 @@ import userbudgets
 
 @app.route('/')
 def index():
-    """Function creating bullet points in front page"""
-    words = [
-        "create your own budgets",
-        "add income & expense transactions by categories",
-        "search transactions by category & word"
-        ]
-    reasons = [
-        "application is free of charge",
-        "bugeting made simple",
-        "personal savings for the future", 
-        "better visibility on your financials", 
-        "much more - register now and try!"
-        ]
-    return render_template('index.html', items1= words, items2=reasons)
+    """Function for index page"""
+    return render_template("index.html")
 
 @app.route("/register", methods=["GET", "POST"])
 def create_user():
@@ -71,7 +59,15 @@ def login():
 
     if not users.login(username, password):
         return render_template("error.html", message="Wrong username or password")
+    
+    #store the user role in session if the login was succesful
+    user_id = session.get("user_id")
+    user_role = users.get_user_role(user_id)
+    if user_role:
+        session["role"] = user_role
+
     return redirect("/login")
+    
 
 @app.route("/logout")
 def logout():
@@ -167,7 +163,6 @@ def view_net_result():
     
     net_result = userbudgets.calculate_net_result(budget_id)
 
-    # add the net result to the budget
     return render_template("netresult.html", 
                            selected_budget=select_budget, 
                            budget_id=budget_id,

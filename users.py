@@ -61,3 +61,12 @@ def require_role(role: int):
 def check_csrf():
     if session["csrf_token"] != request.form["csrf_token"]:
         abort(403)
+
+def get_user_role(user_id: int):
+    """function to get the user role for session"""
+    sql = text("SELECT role FROM users WHERE id=:user_id")
+    result = db.session.execute(sql, {"user_id":user_id})
+    user = result.fetchone()
+    if user:
+        return user.role
+    return None
