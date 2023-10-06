@@ -1,0 +1,39 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<h2>Admin page</h2>
+
+<p>Below you can see a list of all users.</p>
+
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Username</th>
+            <th>Role</th>
+        </tr>
+        {% for user in users %}
+        <tr>
+            <th>{{ user.id }}</th>
+            <th>{{ user.username }}</th>
+            <th>{{ user.role }}</th>
+        </tr>
+        {% endfor %}
+    </table>
+    
+
+<p>Admin users can delete selected budget, below.</p>
+<form action="/admin" method="POST">
+    <label for="budgetSelect">Select a budget:</label>
+    <select name="budget_id" id="budgetSelect">
+    {% for budget in budgets %}
+        <option value="{{ budget.id }}">{{ budget.name }}</option>
+    {% endfor %}
+    </select>
+    <input type="submit" value="Delete">
+    <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+</form>
+
+<p>To return to the front page, press <strong>"log out"</strong> button.</p>
+<a href="/logout"><input type="submit" value="Log out"></a>
+
+{% endblock %}

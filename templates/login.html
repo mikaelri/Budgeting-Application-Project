@@ -8,12 +8,10 @@
 {% endif %}
 
 {% if session.role %}
-<p>Your role is: <strong>{{ session.role }}</strong></p>
-
-<h2>Role definitions:</h2>
+<p>Your role is <strong>{{ session.role }}</strong> and the definitions are:</p>
 <ul>
-    <li><strong>Role 1:</strong> Regular user
-    <li><strong>Role 2:</strong> Admin user
+    <li><strong>1:</strong> Regular user
+    <li><strong>2:</strong> Admin user
 </ul>
 
 <p>In this page you can create your own budget, select to see your own budgets and after selection make changes or even delete them if you are admin user. 
@@ -27,11 +25,11 @@
 <a href="/mybudgets"><input type="submit" value="See all budgets"></a>
 <br>
 
-<p>Click <strong>"See a list of users"</strong> to see all of the users and their roles.</p>
-<a href="/userlist"><input type="submit" value="See a list of all users"></a>
+<p>Click <strong>"Admin page"</strong> to see all of the users and their roles or to delete existing budget.</p>
+<a href="/admin"><input type="submit" value="Admin page"></a>
 <br>
 
-<p>To return to the front page, press <strong>"log out"</strong> button.</p>
+<p>To return to the front page, press <strong>"Log out"</strong> button.</p>
 <a href="/logout"><input type="submit" value="Log out"></a>
 
 <form>
