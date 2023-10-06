@@ -30,7 +30,7 @@ Please note this is not the only use case for the application. The application c
 7. Admin user can see a list of user accounts
 8. ~~Admin user can delete existing budgets~~
 9. ~~User can leave comments to selected budgets~~
-10.~~User can search income and expenses related to specific category (i.e. Salary or Rent)~~
+10. ~~User can search income and expenses related to specific category (i.e. Salary or Rent)~~
 
 ***Database tables***
 
