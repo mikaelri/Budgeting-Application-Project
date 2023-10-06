@@ -1,4 +1,4 @@
-#module to handle when budget is created
+#module to handle when budget is created + other supporting functions for budgets
 from db import db
 from sqlalchemy import text
 
