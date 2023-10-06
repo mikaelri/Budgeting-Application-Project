@@ -44,7 +44,6 @@ def create_user():
         
         flash("User created succesfully!", "success")
         return redirect("/register")
-    
     return render_template("register.html")
 
 @app.route("/login", methods=["GET", "POST"])
@@ -65,10 +64,8 @@ def login():
     user_role = users.get_user_role(user_id)
     if user_role:
         session["role"] = user_role
-
     return redirect("/login")
     
-
 @app.route("/logout")
 def logout():
     """Function to log out from your personal pages"""
@@ -168,3 +165,16 @@ def view_net_result():
                            budget_id=budget_id,
                            net_result=net_result)
 
+@app.route("/userlist", methods=["GET"])
+def view_userlist():
+    """Function to route to admin user page and functionalities"""
+    if request.method == "GET":
+        user_id = session.get("user_id")
+        user_role = users.get_user_role(user_id)
+        if user_role:
+            session["role"] = user_role
+            if user_role == 2:
+                return render_template("userlist.html")
+            else:
+                flash("Access denied, only for admin users")
+                return redirect("/login")
