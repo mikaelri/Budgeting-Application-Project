@@ -12,7 +12,7 @@
 <p>You don't need to add any + or - signs when inserting income or expense transactions.</p>
 <p>Once ready, click <strong>"Add transaction(s)"</strong>.</p>
 
-<form action="/transactions/{{ budget_id }}" method="post">
+<form action="/transactions/{{ budget_id }}" method="POST">
 
   <input type="hidden" name="budget_id" value="{{ budget_id }}">
 
@@ -47,6 +47,7 @@
     <input type="text" name="message" id="message" class="input-box"><br>
   
     <input type="submit" value="Add transaction(s)">
+    <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
   
     <p>{% with messages = get_flashed_messages() %}
       {% if messages %}

@@ -7,7 +7,7 @@
 <p>You are a few steps away from having a personal account and beginning the journey of budgeting!</p>
 <p>Please fill in the details below to create a new user account.</p>
 
-<form action="/register" method="post">
+<form action="/register" method="POST">
 <b> <strong> Username:</strong><br> 
 <input type="text" name="username" id="username" minlength="1" maxlength="25" class="input-box" placeholder="1-25 characters" required></b><br>
 <b> <strong> Password:</strong><br>
@@ -27,6 +27,7 @@ After confirmation, you can click <strong>"Go back to front page"</strong> butto
 <p>From the front page you can log in to your account and start using SpendManager!</p>
 
 <input type="submit" value="Confirm registration">
+<input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
 </form> 
 <br>
 

@@ -19,7 +19,9 @@ Use it for monthly income and expense analysis or create a budget for your holid
 <input type="text" name="username" id="username" size="30"></p>
 <p> <strong> Password : </strong> <br> 
 <input type="password" name= "password1" id="password1" size="30"></p>
+
 <input type="submit" value="Log in">
+<input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
 </form>
 
 <p>Don't have an user account yet? No problem!</p> 

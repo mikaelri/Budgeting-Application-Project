@@ -12,6 +12,7 @@
   <input type="text" name="name" id="name" minlength="1" maxlength="25" class="input-box" placeholder="1-25 characters" required><br>
 
   <input type="submit" value="Create a new budget">
+  <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
 
   <p>{% with messages = get_flashed_messages() %}
     {% if messages %}
