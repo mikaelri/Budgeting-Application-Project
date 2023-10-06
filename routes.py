@@ -165,8 +165,8 @@ def view_net_result():
                            budget_id=budget_id,
                            net_result=net_result)
 
-@app.route("/userlist", methods=["GET"])
-def view_userlist():
+@app.route("/userlist", methods=["GET", "POST"])
+def userlist():
     """Function to route to admin user page and functionalities"""
     if request.method == "GET":
         user_id = session.get("user_id")
@@ -175,6 +175,15 @@ def view_userlist():
             session["role"] = user_role
             if user_role == 2:
                 return render_template("userlist.html")
+            
+            
             else:
                 flash("Access denied, only for admin users")
                 return redirect("/login")
+            
+def view_userlist():
+    if request.method == "GET":
+        pass
+
+
+
