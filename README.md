@@ -6,20 +6,19 @@ The idea of SpendManager application is that a user can create own budget, where
 
 One example for the use case is that user can create an individual budget and to follow monthly income and expenses to see what is the net result for the month. 
 
-The application will use a ready-to-use categories for income and expenses. This is for the reason that it helps the user to group, sort and analyze transactions. The category groups for income and expenses are:
+The application will use a ready-to-use categories for income and expenses. This is for the reason that it helps the user to group, sort and search transactions. The category groups for income and expenses are:
 
 - **Income:** *Salary, Study grant, Miscellanous income*
 - **Expenses:** *Rent, Mortgage, Interest for mortgage, Travel, Groceries, Restaurant & Food,  Miscellanous expenses*
 
-Miscellanous expenses could be i.e. Mobile phone bill, membership fees or electricity. The idea is that the user can add any income or expense even if there is not a category for this. 
-If there is no category the user can write a message related to the expense.
+Miscellanous expenses could be i.e. Mobile phone bill, membership fees or electricity. The idea is that the user can add any income or expense even if there is not a category for this. If there is no category the user can write a message related to the expense.
 
-Please note this is not the only use case for the application. The application could be used also only for expenses, thus, one other example could be a holiday trip for some group. This application could help to track down the fixed costs already known (or something to add during the trip) such as flight,hotel, activity costs.
+Please note this is not the only use case for the application. The application could be used also only for expenses, thus, one other example could be a holiday trip for some group. This application could help to track down the fixed costs already known or something to add during the trip such as flight, hotel, activity costs.
 
 ***Application functionalities*** 
 
-- **Functionalities 1,2,3,4,5,6,7 are ready for testing**
-- **Functionalities 8,9,10 are not ready for testing**
+- **Functionalities 1,2,3,4,5,6,7,8 are ready for testing**
+- **Functionalities 9,10 are not ready for testing**
 
 1. User can log in and out and create a new user account
 2. User can view a list of own individual budgets after logging in (only if at least one exists)
@@ -28,7 +27,7 @@ Please note this is not the only use case for the application. The application c
 5. User can continously add income and expense transactions to selected budget with a message and category
 6. User can view the net result of the selected budget
 7. Admin user can see a list of user accounts
-8. ~~Admin user can delete existing budgets~~
+8. Admin user can delete existing budgets
 9. ~~User can leave comments to selected budgets~~
 10. ~~User can search income and expenses related to specific category (i.e. Salary or Rent)~~
 
