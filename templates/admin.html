@@ -13,27 +13,38 @@
         </tr>
         {% for user in users %}
         <tr>
-            <th>{{ user.id }}</th>
-            <th>{{ user.username }}</th>
-            <th>{{ user.role }}</th>
+        <td>{{ user.id }}</td>
+        <td>{{ user.username }}</td>
+        <td>{{ "Admin" if user.role == 2 else "Regular User" }}</td>
         </tr>
         {% endfor %}
     </table>
     
+    <p>Admin users can delete selected budget, below.</p>
+    <form action="/admin" method="POST">
+        <label for="budgetSelect">Select a budget:</label>
+        <select name="budget_id" id="budgetSelect">
+        {% for budget in budgets %}
+            <option value="{{ budget.id }}">{{ budget.name }}</option>
+        {% endfor %}
+        </select>
+        <input type="submit" value="Delete">
+        <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+    </form>
+    
+    <p>{% with messages = get_flashed_messages() %}
+        {% if messages %}
+          <div class="flash-messages">
+            {% for message in messages %}
+              <strong><div class="alert alert-{{ message[1] }}">{{ message }}</div></strong>
+            {% endfor %}
+          </div>
+        {% endif %}
+      {% endwith %}
+      </p>
 
-<p>Admin users can delete selected budget, below.</p>
-<form action="/admin" method="POST">
-    <label for="budgetSelect">Select a budget:</label>
-    <select name="budget_id" id="budgetSelect">
-    {% for budget in budgets %}
-        <option value="{{ budget.id }}">{{ budget.name }}</option>
-    {% endfor %}
-    </select>
-    <input type="submit" value="Delete">
-    <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
-</form>
-
-<p>To return to the front page, press <strong>"log out"</strong> button.</p>
-<a href="/logout"><input type="submit" value="Log out"></a>
+<p>To return to your personal page, press <strong>"Return to your personal page"</strong> button.</p>
+<a href="/login"><input type="submit" value="Return to your personal page"></a>
 
 {% endblock %}
+

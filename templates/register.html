@@ -8,26 +8,26 @@
 <p>Please fill in the details below to create a new user account.</p>
 
 <form action="/register" method="POST">
-<b> <strong> Username:</strong><br> 
-<input type="text" name="username" id="username" minlength="1" maxlength="25" class="input-box" placeholder="1-25 characters" required></b><br>
-<b> <strong> Password:</strong><br>
-<input type="password" name="password1" id="password1" minlength="5" maxlength="25" class="input-box" placeholder="5-25 characters" required></b><br>
-<b> <strong> Repeat password:</strong><br>
-<input type="password" name="password2" id="password2" minlength="5" maxlength="25" class="input-box" placeholder="5-25 characters" required></b><br>
+  <b> <strong> Username:</strong><br> 
+    <input type="text" name="username" id="username" minlength="1" maxlength="25" class="input-box" placeholder="1-25 characters" required></b><br>
+    <b> <strong> Password:</strong><br>
+    <input type="password" name="password1" id="password1" minlength="5" maxlength="25" class="input-box" placeholder="5-25 characters" required></b><br>
+    <b> <strong> Repeat password:</strong><br>
+    <input type="password" name="password2" id="password2" minlength="5" maxlength="25" class="input-box" placeholder="5-25 characters" required></b><br>
 
-<select name="role">
-<option value=1> Regular user
-<option value=2> Admin
-</select>
+    <select name="role">
+    <option value=1> Regular user
+    <option value=2> Admin
+    </select>
 
-<br>
+    <br>
 
-<p>Once you have filled in the details, click <strong>"Confirm registration"</strong>.<br>
-After confirmation, you can click <strong>"Go back to front page"</strong> button and you will be routed to the front page. 
-<p>From the front page you can log in to your account and start using SpendManager!</p>
+    <p>Once you have filled in the details, click <strong>"Confirm registration"</strong>.<br>
+    After confirmation, you can click <strong>"Go back to front page"</strong> button and you will be routed to the front page. 
+    <p>From the front page you can log in to your account and start using SpendManager!</p>
 
-<input type="submit" value="Confirm registration">
-<input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+    <input type="submit" value="Confirm registration">
+    <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
 </form> 
 <br>
 

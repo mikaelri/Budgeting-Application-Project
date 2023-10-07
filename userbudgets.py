@@ -85,3 +85,31 @@ def calculate_net_result(budget_id: int):
         return net_result  #returns the net result so routes.py can handle it to html
     except:
         False
+
+def get_all_budgets():
+    """function to get all the budgets for selected user"""
+    sql = text("SELECT id, name FROM budgets")
+    result = db.session.execute(sql)
+    all_budgets = result.fetchall()
+    return all_budgets
+
+def delete_budget(budget_id: int):
+    """function for admin users to delete a budget"""
+
+    try:
+        """delete first the transactions table data for selected budget_id"""
+        sql_transactions = text("""DELETE from transactions WHERE budget_id=:budget_id""")
+        db.session.execute(sql_transactions, {"budget_id": budget_id})
+
+        """delete second the results table data for selected budget_id"""
+        sql_results = text("""DELETE from results where budget_id=:budget_id""")
+        db.session.execute(sql_results, {"budget_id": budget_id})
+
+        """delete last the the budgets table data for selected id"""
+        sql_budgets = text("""DELETE from budgets where id=:budget_id""")
+        db.session.execute(sql_budgets, {"budget_id":budget_id})
+        db.session.commit()
+
+        return True
+    except:
+        return False

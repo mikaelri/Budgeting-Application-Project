@@ -15,19 +15,20 @@ Use it for monthly income and expense analysis or create a budget for your holid
 <p>To log in, please fill your Username and Password in below boxes and press <strong>"Log in".</strong></p>
 
 <form action="/login" method="POST">
-<p> <strong> Username: </strong> <br> 
-<input type="text" name="username" id="username" size="30"></p>
-<p> <strong> Password : </strong> <br> 
-<input type="password" name= "password1" id="password1" size="30"></p>
+    <p> <strong> Username: </strong> <br> 
+    <input type="text" name="username" id="username" size="30"></p>
+    <p> <strong> Password : </strong> <br> 
+    <input type="password" name= "password1" id="password1" size="30"></p>
 
-<input type="submit" value="Log in">
-<input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+    <input type="submit" value="Log in">
+    <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
 </form>
 
 <p>Don't have an user account yet? No problem!</p> 
 <p>You can easily create a new user by clicking the <strong>"Register a new user" </strong>button and following the instructions.</p>
+
 <form action="/register" method="GET">
-<input type="submit" value="Register a new user">
+    <input type="submit" value="Register a new user">
 </form>
 
 <p><strong>Why should I start using SpendManager?</strong></p>

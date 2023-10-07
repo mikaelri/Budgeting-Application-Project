@@ -8,11 +8,15 @@
 {% endif %}
 
 {% if session.role %}
-<p>Your role is <strong>{{ session.role }}</strong> and the definitions are:</p>
-<ul>
-    <li><strong>1:</strong> Regular user
-    <li><strong>2:</strong> Admin user
-</ul>
+<p>Your role is     
+  <strong>
+  {% if session.role == 2 %}
+  Admin user
+  {% else %}
+  Regular user
+  {% endif %}
+  </strong> 
+</p>
 
 <p>In this page you can create your own budget, select to see your own budgets and after selection make changes or even delete them if you are admin user. 
     Admin users can also see a list of all users.</p>
