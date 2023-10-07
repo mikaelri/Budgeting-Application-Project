@@ -58,7 +58,7 @@ def login():
     if not users.login(username, password):
         return render_template("error.html", message="Wrong username or password")
     
-    #store the user role in session if the login was succesful
+    """store the user role in session if the login was succesful"""
     user_id = session.get("user_id")
     user_role = users.get_user_role(user_id)
     if user_role:
