@@ -76,4 +76,3 @@ def get_user_list():
     sql = text("SELECT id, username, role FROM users")
     result = db.session.execute(sql).fetchall()
     return result
-    
