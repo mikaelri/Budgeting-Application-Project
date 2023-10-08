@@ -1,3 +1,4 @@
+"""service function for sql query"""
 def empty(income, expense, income_category, expense_category, message):
     """function to perform if statements for userbudgets"""
     income = 0 if income in ["", " "] else income
