@@ -27,7 +27,7 @@ Please note this is not the only use case for the application. The application c
 5. User can continously add income and expense transactions to selected budget with a message and category
 6. User can view the net result of the selected budget
 7. Admin user can see a list of user accounts
-8. Admin user can delete existing budgets
+8. Admin user can delete existing budgets (at the moment only own budgets)
 9. ~~User can leave comments to selected budgets~~
 10. ~~User can search income and expenses related to specific category (i.e. Salary or Rent)~~
 
