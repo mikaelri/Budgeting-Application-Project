@@ -187,7 +187,7 @@ def admin_list():
         budget_count = budgets.get_budget_count(creator_id)
 
         if budget_count < 1:
-            flash ("No your own budgets to remove.", "error")
+            flash ("Delete not succesful, you cannot delete other users budget.", "error")
             return redirect("/admin")
 
         budget_id = request.form.get("budget_id")
