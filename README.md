@@ -34,7 +34,7 @@ Please note this is not the only use case for the application. The application c
 ***Database tables***
 
 1. users
-2. budgets for the users
+2. budgets
 3. transactions
 4. results
 5. comments
