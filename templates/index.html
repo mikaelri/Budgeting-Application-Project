@@ -15,20 +15,29 @@ Use it for monthly income and expense analysis or create a budget for your holid
 <p>To log in, please fill your Username and Password in below boxes and press <strong>"Log in".</strong></p>
 
 <form action="/login" method="POST">
-    <p> <strong> Username: </strong> <br> 
-    <input type="text" name="username" id="username" size="30"></p>
-    <p> <strong> Password : </strong> <br> 
-    <input type="password" name= "password1" id="password1" size="30"></p>
+    <div class="form-group col-md-4">
+        <label for="username">Username</label>
+        <input type="text" class="form-control" name="username" id="username">
+    </div>
 
-    <input type="submit" value="Log in">
-    <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+    <div class="form-group col-md-4">
+        <label for="password">Password</label>
+        <input type="text" class="form-control" name= "password1", id="password1">
+    </div>
+
+    <div class="form-group col-4 mt-3">
+        <button type="submit" class="btn btn-secondary">Log in</button>
+        <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+    </div>
 </form>
 
 <p>Don't have an user account yet? No problem!</p> 
-<p>You can easily create a new user by clicking the <strong>"Register a new user" </strong>button and following the instructions.</p>
+<p>Create a new account just in seconds by following the instructions below.</p>
 
 <form action="/register" method="GET">
-    <input type="submit" value="Register a new user">
+    <div class="form-group col-4 mt-3">
+        <button type="submit" class="btn btn-secondary">Register a new user</button>
+    </div>
 </form>
 
 <p><strong>Why should I start using SpendManager?</strong></p>
@@ -36,7 +45,6 @@ Use it for monthly income and expense analysis or create a budget for your holid
     <li>application is free of charge
     <li>bugeting made simple
     <li>personal savings for the future
-    <li>better visibility on your financials
     <li>much more - register now and try!
 </ul>
 

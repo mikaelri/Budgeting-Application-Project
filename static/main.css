@@ -2,7 +2,11 @@ body {
     margin: auto;
     max-width: 45em;
     font-family: 'Roboto', 'Arial', sans-serif;
-    background-color: #E8F5E9
+    background-color: #e6f7e9
+}
+
+h1 {
+    color: #000000
 }
 
 table {
