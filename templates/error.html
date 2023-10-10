@@ -1,9 +1,18 @@
 {% extends "layout.html" %}
 {% block content %}
 
-<strong>Exception:</strong> {{ message }}
+<strong>Exception:</strong> {{ message }}<br>
 
-<p><a href="/"><input type="submit" value="Go to front page"></a></p>
-<p><a href="/register"><input type="submit" value="Go to registration page"></a></p>
+<form action="/" method="GET">
+    <div class="text-left">
+      <button type="submit" class="btn btn-secondary">Go to front page</button>
+    </div>
+  </form>
+
+  <form action="/register" method="GET">
+    <div class="text-left">
+      <button type="submit" class="btn btn-success mt-1">Go to registration page</button>
+    </div>
+  </form>
 
 {% endblock %}
