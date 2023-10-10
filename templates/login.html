@@ -21,20 +21,32 @@
 <p>In this page you can create your own budget, select to see your own budgets and after selection make changes or even delete them if you are admin user. 
     Admin users can also see a list of all users.</p>
 
-<form action="/budget" method="GET"></form>
-<a href="/budget"><input type="submit" value="Create a new budget"></a>
-<br>
+<form action="/budget" method="GET">
+  <div class="form-group col-4 mt-3">
+    <button type="submit" class="btn btn-secondary">Create a new budget</button>
+  </div>
+</form>
 
-<p>Click <strong>"See all budgets"</strong> to select which budget to modify.</p>
-<a href="/mybudgets"><input type="submit" value="See all budgets"></a>
-<br>
-
-<p>Click <strong>"Admin page"</strong> to see all of the users and their roles or to delete existing budget.</p>
-<a href="/admin"><input type="submit" value="Admin page"></a>
-<br>
+<p>Click <strong>"See all budgets"</strong> to select which budget to add transactions or see net result.</p>
+<form action="/mybudgets" method="GET">
+  <div class="form-group col-4 mt-3">
+    <button type="submit" class="btn btn-secondary">See all budgets</button>
+  </div>
+</form>
 
 <p>To return to the front page, press <strong>"Log out"</strong> button.</p>
-<a href="/logout"><input type="submit" value="Log out"></a>
+<form action="/logout" method="GET">
+  <div class="form-group col-4 mt-3">
+    <button type="submit" class="btn btn-secondary">Log out</button>
+  </div>
+</form>
+
+<p>Click <strong>"Admin page"</strong> to see all of the users and their roles or to delete existing budget.</p>
+<form action="/admin" method="GET">
+  <div class="form-group col-4 mt-3">
+    <button type="submit" class="btn btn-info">Admin page</button>
+  </div>
+</form>
 
 <form>
 <p>{% with messages = get_flashed_messages() %}
