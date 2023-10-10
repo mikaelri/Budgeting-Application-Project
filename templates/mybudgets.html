@@ -3,49 +3,40 @@
 
 <h2>Your Budgets</h2>
 
-<p>Select in which budget you want to add income or expense transactions and click <strong>"Add transactions"</strong>.</p>
-<form action="/transactions" method="GET">
-  <label for="budgetSelect">Select a budget:</label>
-  <select name="budget_id" id="budgetSelect">
-    {% for budget in budgets %}
-      <option value="{{ budget.id }}">{{ budget.name }}</option>
-    {% endfor %}
-  </select>
-  <input type="submit" value="Add transactions">
-</form>
+Select in which budget you want to add income or expense transactions and click <strong>"Add transactions"</strong>.
 
-<p>If you want to calculate the net result of certain budget, click below.</p>
-<form action="/netresult" method="GET">
-  <label for="budgetSelect">Select a budget:</label>
-  <select name="budget_id" id="budgetSelect">
-    {% for budget in budgets %}
-      <option value="{{ budget.id }}">{{ budget.name }}</option>
-    {% endfor %}
-  </select>
-  <input type="submit" value="Calculate net result">
-</form>
-
-<p>Or return to your personal page.</p>
-<a href="/login"><input type="submit" value="Return to your personal page"></a>
-
-{% endblock %}
-
-<form action="/budget" method="POST">
-  <div class="form-group col-4 mt-3">
-    <strong>Name of the budget:</strong><br>
-    <input type="text" class="form-control" name="name" id="name" minlength="1" maxlength="25" placeholder="1-25 characters" required>
+<form class="form-inline" action="/transactions" method="GET">
+  <div class="wrap-input">
+    <label for="budgetSelect"></label>
+    <select class="form-control" name="budget_id" id="budgetSelect">
+        {% for budget in budgets %}
+        <option value="{{ budget.id }}">{{ budget.name }}</option>
+      {% endfor %}
+    </select>
+    <button type="submit" class="btn btn-secondary mt-1">Add transactions</button>
   </div>
+  <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+</form><br>
 
-  <div class="form-group col-4 mt-3">
-    <button type="submit" class="btn btn-secondary">Create a new budget</button>
-    <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+If you want to calculate the net result of certain budget, click below.
+<form class="form-inline" action="/netresult" method="GET">
+  <div class="wrap-input">
+    <label for="budgetSelect"></label>
+    <select class="form-control" name="budget_id" id="budgetSelect">
+      {% for budget in budgets %}
+        <option value="{{ budget.id }}">{{ budget.name }}</option>
+      {% endfor %}
+    </select>
+    <button type="submit" class="btn btn-secondary mt-1">Calculate net result</button>
   </div>
-</form>
+  <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+</form><br>
 
-<p>Or return to your personal page.</p>
-
-<form action="/login" method="GET">
-  <div class="form-group col-4 mt-3">
+Or return to your personal page.
+<form class="form-inline" action="/login" method="GET">
+  <div class="text-left mt-1">
     <button type="submit" class="btn btn-secondary">Return to your page</button>
   </div>
 </form>
+
+{% endblock %}

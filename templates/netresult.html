@@ -9,7 +9,11 @@
   <p>No budget selected.</p>
 {% endif %}
 
-<p>Return to your budgets.</p>
-<a href="/mybudgets"><input type="submit"value="Back to My Budgets"></a>
+<form class="form-inline" action="/login" method="GET">
+  <div class="text-left mt-1">
+    <button type="submit" class="btn btn-secondary">Back to My Budgets</button>
+  </div>
+</form>
 
 {% endblock %}
+

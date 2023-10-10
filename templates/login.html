@@ -22,31 +22,31 @@
     Admin users can also see a list of all users.</p>
 
 <form action="/budget" method="GET">
-  <div class="form-group col-4 mt-3">
+  <div class="text-left">
     <button type="submit" class="btn btn-secondary">Create a new budget</button>
   </div>
-</form>
+</form><br>
 
 <p>Click <strong>"See all budgets"</strong> to select which budget to add transactions or see net result.</p>
 <form action="/mybudgets" method="GET">
-  <div class="form-group col-4 mt-3">
+  <div class="text-left">
     <button type="submit" class="btn btn-secondary">See all budgets</button>
   </div>
-</form>
+</form><br>
 
 <p>To return to the front page, press <strong>"Log out"</strong> button.</p>
 <form action="/logout" method="GET">
-  <div class="form-group col-4 mt-3">
+  <div class="text-left">
     <button type="submit" class="btn btn-secondary">Log out</button>
   </div>
-</form>
+</form><br>
 
 <p>Click <strong>"Admin page"</strong> to see all of the users and their roles or to delete existing budget.</p>
 <form action="/admin" method="GET">
-  <div class="form-group col-4 mt-3">
+  <div class="text-left">
     <button type="submit" class="btn btn-info">Admin page</button>
   </div>
-</form>
+</form><br>
 
 <form>
 <p>{% with messages = get_flashed_messages() %}
