@@ -5,19 +5,24 @@
 
 <p>Below you can see a list of all users.</p>
 
-<p><table>
+<p><table class="table-sm table-borderless">
+  <thead class="thead">
     <tr>
-        <th>ID</th>
-        <th>Username</th>
-        <th>Role</th>
+        <th scope="col">ID</th>
+        <th scope="col">Username</th>
+        <th scope="col">Role</th>
     </tr>
+  </thead>
+
+  <tbody>
     {% for user in users %}
     <tr>
-    <td>{{ user.id }}</td>
-    <td>{{ user.username }}</td>
-    <td>{{ "Admin" if user.role == 2 else "Regular User" }}</td>
+      <td>{{ user.id }}</td>
+      <td>{{ user.username }}</td>
+      <td>{{ "Admin" if user.role == 2 else "Regular User" }}</td>
     </tr>
     {% endfor %}
+  </tbody>
 </table></p>
   
 <p>Admin users can delete selected budget(s).<br>
