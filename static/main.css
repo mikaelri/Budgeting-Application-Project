@@ -1,29 +1,40 @@
 body {
-    margin: auto;
-    max-width: 45em;
-    font-family: 'Roboto', 'Arial', sans-serif;
-    background-color: #e6f7e9
+margin: auto;
+max-width: 45em;
+font-family: 'Roboto', 'Arial', sans-serif;
+background-color: #e6f7e9
 }
 
 h1 {
-    color: #000000
+color: #000000
 }
 
 table {
-    width: 80%;
+width: 80%;
 }
 
 table, td, th, tr {
-    border-style: solid;
-    border-color: black;
-    border-width: 2px;
-    text-align: center; 
+border-style: solid;
+border-color: black;
+border-width: 2px;
+text-align: center; 
 }
 
 .input-box {
-    margin: auto;
-    max-width: 45em; 
-    box-sizing: border-box; 
-    padding: 5px; 
-    margin-bottom: 10px;
+margin: auto;
+max-width: 45em; 
+box-sizing: border-box; 
+padding: 5px; 
+margin-bottom: 10px;
+}
+
+.flash-messages .alert {
+margin-left: 0;
+padding-left: 0;
+}
+
+.flash-messages:empty,
+.flash-messages:not(:empty) + .flash-container {
+margin: 0;
+padding: 0;
 }
