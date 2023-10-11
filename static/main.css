@@ -13,7 +13,7 @@ table {
     width: 80%;
 }
 
-table, td, th {
+table, td, th, tr {
     border-style: solid;
     border-color: black;
     border-width: 2px;
