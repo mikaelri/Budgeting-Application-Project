@@ -5,7 +5,7 @@ from sqlalchemy import text
 def new_budget(name: str, creator_id: int):
     """function for creating a new budget"""
     try:
-        sql = text("""INSERT INTO budgets (name, creator_id) VALUES(:name, :creator_id)""")
+        sql = text("INSERT INTO budgets (name, creator_id) VALUES(:name, :creator_id)")
         db.session.execute(sql, {"name": name, "creator_id": creator_id})
         db.session.commit()
         return True

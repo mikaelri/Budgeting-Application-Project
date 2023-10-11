@@ -98,15 +98,15 @@ def delete_budget(budget_id: int):
 
     try:
         """delete first the transactions table data for selected budget_id"""
-        sql_transactions = text("""DELETE from transactions WHERE budget_id=:budget_id""")
+        sql_transactions = text("DELETE from transactions WHERE budget_id=:budget_id")
         db.session.execute(sql_transactions, {"budget_id": budget_id})
 
         """delete second the results table data for selected budget_id"""
-        sql_results = text("""DELETE from results where budget_id=:budget_id""")
+        sql_results = text("DELETE from results where budget_id=:budget_id")
         db.session.execute(sql_results, {"budget_id": budget_id})
 
         """delete last the the budgets table data for selected id"""
-        sql_budgets = text("""DELETE from budgets where id=:budget_id""")
+        sql_budgets = text("DELETE from budgets where id=:budget_id")
         db.session.execute(sql_budgets, {"budget_id":budget_id})
         db.session.commit()
 
