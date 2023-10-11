@@ -2,14 +2,14 @@
 {% block content %}
 
 <h2>Create a new budget</h2>
-<p>You can add a new budget in this page and give it an unique name.</p>
 
+<p>You can add a new budget in this page and give it an unique name.</p>
 <p>Please note you can create up to 5 budgets.</p>
 
 <form action="/budget" method="POST">
-  <div class="form-group col-4 mt-3">
+  <div class="form-group col-4">
     <div class="row g-3 align-items-center">
-      <b>Name of the budget:</b><br>
+      <b>Name of the budget:</b>
       <input type="text" class="form-control" name="name" id="name" minlength="1" maxlength="25" placeholder="1-25 characters" required>
     </div>
   </div>
@@ -18,27 +18,22 @@
     <button type="submit" class="btn btn-secondary">Create a new budget</button>
     <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
   </div>
-</form><br>
-
-<p>Or return to your personal page.</p>
+</form>
 
 <form action="/login" method="GET">
   <div class="text-left">
-    <button type="submit" class="btn btn-secondary">Return to your page</button>
+    <button type="submit" class="btn btn-secondary mt-2">Return to your page</button>
   </div>
 </form>
 
-<form>
-  <p>{% with messages = get_flashed_messages() %}
-      {% if messages %}
-        <div class="flash-messages">
-          {% for message in messages %}
-            <b><div class="alert alert-{{ message[1] }}">{{ message }}</div></b>
-          {% endfor %}
-        </div>
-      {% endif %}
-    {% endwith %}
-    </p>
-  </form>
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    <div class="flash-messages">
+      {% for message in messages %}
+        <div class="alert alert-{{ message[1] }}"><b>{{ message }}</b></div>
+      {% endfor %}
+    </div>
+  {% endif %}
+{% endwith %}
 
 {% endblock %}

@@ -147,7 +147,7 @@ def add_new_transactions(budget_id: int):
             flash("Transaction added succesfully!", "success")
             return redirect(f"/transactions?budget_id={session.get('budget_id')}")
         else:
-            flash("Failed to add transactions to the budget, try again!")
+            flash("Failed to add transaction. The entered amount exceeds the maximum limit of 2 147 483 647.", "error")
             return redirect(f"/transactions?budget_id={session.get('budget_id')}")
         
     return render_template("transactions.html", budget_id=budget_id)
@@ -176,7 +176,7 @@ def admin_list():
             all_budgets = userbudgets.get_all_budgets() 
             return render_template("admin.html", users=all_users, budgets=all_budgets)
         else:
-            flash("Access denied, only for admin users", "error")
+            flash("Access denied. The page is only for admin users.", "error")
             return redirect("/login")
            
     """Remove existing budget if there is at least 1 budget created"""
