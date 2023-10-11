@@ -30,9 +30,10 @@ def create_user(username: str, password: str, role: int):
     """function for registering a new user to database"""
     hash_value = generate_password_hash(password)
     try:
-        sql = text(
-            """INSERT INTO users (username, password, role) 
-            VALUES (:username, :password, :role)""")
+        sql = text("""
+            INSERT INTO users (username, password, role) 
+            VALUES (:username, :password, :role)
+                   """)
         db.session.execute(sql, {"username":username, "password":hash_value, "role":role})
         db.session.commit()
     except:

@@ -12,11 +12,12 @@ def add_transaction(budget_id: int, income: int, expense:int, income_category: s
         income, expense, income_category, expense_category, message = budgetservice.empty(
         income, expense, income_category, expense_category, message)
         
-        sql = text(
-            """INSERT INTO transactions (budget_id, income, expense, 
+        sql = text("""
+            INSERT INTO transactions (budget_id, income, expense, 
             income_category, expense_category, message)
             VALUES(:budget_id, :income, :expense, :income_category, 
-            :expense_category, :message)""")
+            :expense_category, :message)
+                   """)
         db.session.execute(sql, {
                                 "budget_id": budget_id,
                                 "income": income,
@@ -37,11 +38,13 @@ def calculate_net_result(budget_id: int):
     # First get the total of income and expense from transactions table
         sql_sum_income = text(""" 
         SELECT budget_id, sum(income) AS total_income from transactions where budget_id=:budget_id
-        GROUP BY budget_id""")
+        GROUP BY budget_id
+                              """)
         
         sql_sum_expense = text(""" 
         SELECT budget_id, sum(expense) AS total_expense from transactions where budget_id=:budget_id
-        GROUP BY budget_id""")
+        GROUP BY budget_id
+                               """)
 
         income_result = db.session.execute(sql_sum_income, {"budget_id": budget_id}).first()
         expense_result = db.session.execute(sql_sum_expense, {"budget_id": budget_id}).first()
@@ -71,7 +74,8 @@ def calculate_net_result(budget_id: int):
             # Add new record if there is no data stored
             sql_insert = text("""
             INSERT INTO results (budget_id, total_income, total_expense, net_result) 
-            VALUES (:budget_id, :total_income, :total_expense, :net_result)""")
+            VALUES (:budget_id, :total_income, :total_expense, :net_result)
+                              """)
             
             db.session.execute(sql_insert, {
                 "budget_id": budget_id, 
