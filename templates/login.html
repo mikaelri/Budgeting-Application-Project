@@ -4,18 +4,18 @@
 <h2>Your personal page</h2>
 
 {% if session.user_username %}
-<p> You are logged in with a username <strong>{{ session.user_username }}</strong>. Welcome to your personal page!</p>
+<p> You are logged in with a username <b>{{ session.user_username }}</b>. Welcome to your personal page!</p>
 {% endif %}
 
 {% if session.role %}
 <p>Your role is     
-  <strong>
+  <b>
   {% if session.role == 2 %}
   Admin user
   {% else %}
   Regular user
   {% endif %}
-  </strong> 
+  </b> 
 </p>
 
 <p>In this page you can create your own budget, select to see your own budgets and after selection make changes or even delete them if you are admin user. 
@@ -27,21 +27,21 @@
   </div>
 </form><br>
 
-<p>Click <strong>"See all budgets"</strong> to select which budget to add transactions or see net result.</p>
+<p>Click <b>"See all budgets"</b> to select which budget to add transactions or see net result.</p>
 <form action="/mybudgets" method="GET">
   <div class="text-left">
     <button type="submit" class="btn btn-secondary">See all budgets</button>
   </div>
 </form><br>
 
-<p>To return to the front page, press <strong>"Log out"</strong> button.</p>
+<p>To return to the front page, press <b>"Log out"</b> button.</p>
 <form action="/logout" method="GET">
   <div class="text-left">
     <button type="submit" class="btn btn-secondary">Log out</button>
   </div>
 </form><br>
 
-<p>Click <strong>"Admin page"</strong> to see all of the users and their roles or to delete existing budget.</p>
+<p>Click <b>"Admin page"</b> to see all of the users and their roles or to delete existing budget.</p>
 <form action="/admin" method="GET">
   <div class="text-left">
     <button type="submit" class="btn btn-info">Admin page</button>
@@ -53,7 +53,7 @@
     {% if messages %}
       <div class="flash-messages">
         {% for message in messages %}
-          <strong><div class="alert alert-{{ message[1] }}">{{ message }}</div></strong>
+          <b><div class="alert alert-{{ message[1] }}">{{ message }}</div></b>
         {% endfor %}
       </div>
     {% endif %}

@@ -9,17 +9,17 @@
 
 <p>Below you can add transactions to your selected budget.</p>
 <p>You don't need to add any + or - signs when inserting income or expense transactions.</p>
-<p>Once ready, click <strong>"Add transaction"</strong>.</p>
+<p>Once ready, click <b>"Add transaction"</b>.</p>
 
 <form action="/transactions/{{ budget_id }}" method="POST">
   <div class="form-group col-4 mt-3">
     <div class="row g-3 align-items-center">
       <input type="hidden" name="budget_id" value="{{ budget_id }}">
 
-      <strong>Income</strong><br>
+      <b>Income</b><br>
       <input type="number" name="income" id="income" class="form-control">
 
-      <strong>Income category</strong>
+      <b>Income category</b>
       <select class="form-control" name="income_category" id="income_category">
       <option value="" > 
       <option value="salary"> salary
@@ -31,10 +31,10 @@
 
   <div class="form-group col-md-4">
     <div class="row g-3 align-items-center">
-      <strong>Expense:</strong><br>
+      <b>Expense:</b><br>
       <input type="number" name="expense" id="expense" class="form-control"><br>
   
-      <strong>Expense category</strong><br>
+      <b>Expense category</b><br>
       <select class="form-control" name="expense_category" id="expense_category">
       <option value="" > 
       <option value="rent"> rent
@@ -49,7 +49,7 @@
 
   <div class="form-group col-md-4">
     <div class="row g-3 align-items-center">
-      <strong>Message:</strong><br>
+      <b>Message:</b><br>
       <input type="text" name="message" id="message" class="form-control"><br>
     </div>
   </div>
@@ -63,7 +63,7 @@
       {% if messages %}
         <div class="flash-messages">
           {% for message in messages %}
-            <strong><div class="alert alert-{{ message[1] }}">{{ message }}</div></strong>
+            <b><div class="alert alert-{{ message[1] }}">{{ message }}</div></b>
           {% endfor %}
         </div>
       {% endif %}

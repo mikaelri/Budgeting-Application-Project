@@ -1,9 +1,7 @@
 """module app to run the app.py file and flask used to handle the routing of the application"""
 from flask import render_template, redirect, request, session, flash, url_for
 from app import app
-import users
-import budgets
-import userbudgets
+import users, budgets, userbudgets
 
 @app.route('/')
 def index():
@@ -196,4 +194,3 @@ def admin_list():
         if success:
             flash ("Budget was removed succesfully!", "success")
             return redirect("/admin")
-

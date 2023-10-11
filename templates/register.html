@@ -3,41 +3,52 @@
 
 <h2>Registration page</h2>
 
-<p><strong>Great choice!</strong><p> 
-<p>You are a few steps away from having a personal account and beginning the journey of budgeting!</p>
-<p>Please fill in the details below to create a new user account.</p>
+<p><b>Great choice!</b><br></p>
+You are a few steps away from having a personal account and beginning the journey of budgeting!<br>
+Please fill in the details below to create a new user account.<br>
 
 <form action="/register" method="POST">
-  <b> <strong> Username:</strong><br> 
-    <input type="text" name="username" id="username" minlength="1" maxlength="25" class="input-box" placeholder="1-25 characters" required></b><br>
-    <b> <strong> Password:</strong><br>
-    <input type="password" name="password1" id="password1" minlength="5" maxlength="25" class="input-box" placeholder="5-25 characters" required></b><br>
-    <b> <strong> Repeat password:</strong><br>
-    <input type="password" name="password2" id="password2" minlength="5" maxlength="25" class="input-box" placeholder="5-25 characters" required></b><br>
+  <div class="form-group col-4 mt-2">
+    <div class="row g-3 align-items-center">
+      
+      <b>Username:</b>
+      <input type="text" name="username" id="username" minlength="1" maxlength="25" class="form-control" placeholder="1-25 characters" required>
+      
+      <b> Password:</b>
+      <input type="password" name="password1" id="password1" minlength="5" maxlength="25" class="form-control" placeholder="5-25 characters" required>
 
-    <select name="role">
-    <option value=1> Regular user
-    <option value=2> Admin
-    </select>
+      <b> Repeat password:</b><br>
+      <input type="password" name="password2" id="password2" minlength="5" maxlength="25" class="form-control" placeholder="5-25 characters" required>
+      
+      <b> User role:</b>
+      <select class="form-control" name="role">
+        <option value=1> Regular user
+        <option value=2> Admin
+      </select>
+    </div>
+  </div>
 
-    <br>
-
-    <p>Once you have filled in the details, click <strong>"Confirm registration"</strong>.</p>
-    <p>After confirmation, you can click <strong>"Go back to front page"</strong> button and you will be routed to the front page.</p>
-    <p>From the front page you can log in to your account and start using SpendManager!</p>
-
-    <input type="submit" value="Confirm registration">
+<p>Once you have filled in the details, click <b>"Confirm registration"</b>.</p>
+<p>After confirmation, you can click <b>"Go back to front page"</b> button and you will be routed to the front page.</p>
+<p>From the front page you can log in to your account and start using SpendManager!</p>
+  <div class="text-left">
+    <button type="submit" class="btn btn-secondary">Confirm registration</button>     
     <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+  </div>
 </form> 
-<br>
 
-<a href="/"><input type="submit" value="Go back to front page"></a>
+<form class="form-inline" action="/" method="GET">
+  <div class="text-left">
+    <button type="submit" class="btn btn-secondary mt-3">Go to front page</button>
+    <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+  </div>
+</form>
 
 <p>{% with messages = get_flashed_messages() %}
   {% if messages %}
     <div class="flash-messages">
       {% for message in messages %}
-        <strong><div class="alert alert-{{ message[1] }}">{{ message }}</div></strong>
+        <b><div class="alert alert-{{ message[1] }}">{{ message }}</div></b>
       {% endfor %}
     </div>
   {% endif %}
