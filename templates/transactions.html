@@ -1,53 +1,63 @@
 {% extends "layout.html" %}
 {% block content %}
 
-<h2>Add transactions</h2>
-
 {% if selected_budget %}
 
-<p> <strong>Selected budget:</strong> {{ selected_budget.name }}</p>
+<h2>Add transactions - {{ selected_budget.name }} budget</h2>
+
 {% endif %}
 
-<p>Below you can add transactions to your <strong>{{ selected_budget.name }}</strong> budget.</p>
+<p>Below you can add transactions to your selected budget.</p>
 <p>You don't need to add any + or - signs when inserting income or expense transactions.</p>
-<p>Once ready, click <strong>"Add transaction(s)"</strong>.</p>
+<p>Once ready, click <strong>"Add transaction"</strong>.</p>
 
 <form action="/transactions/{{ budget_id }}" method="POST">
+  <div class="form-group col-4 mt-3">
+    <div class="row g-3 align-items-center">
+      <input type="hidden" name="budget_id" value="{{ budget_id }}">
 
-  <input type="hidden" name="budget_id" value="{{ budget_id }}">
+      <strong>Income</strong><br>
+      <input type="number" name="income" id="income" class="form-control">
 
-    <strong>Income</strong><br>
-    <input type="number" name="income" id="income" class="input-box"><br>
+      <strong>Income category</strong>
+      <select class="form-control" name="income_category" id="income_category">
+      <option value="" > 
+      <option value="salary"> salary
+      <option value="study grant"> study grant
+      <option value="miscellanous_inc"> miscellanous income
+      </select>
+    </div>
+  </div>
+
+  <div class="form-group col-md-4">
+    <div class="row g-3 align-items-center">
+      <strong>Expense:</strong><br>
+      <input type="number" name="expense" id="expense" class="form-control"><br>
   
-    <strong>Income category</strong>
-    <br><select name="income_category" id="income_category">
-    <option value="" > 
-    <option value="salary"> salary
-    <option value="study grant"> study grant
-    <option value="miscellanous_inc"> miscellanous income
-    </select>
-    <br><br>
-  
-    <strong>Expense:</strong><br>
-    <input type="number" name="expense" id="expense" class="input-box"><br>
-  
-    <strong>Expense category</strong><br>
-    <select name="expense_category" id="expense_category">
-    <option value="" > 
-    <option value="rent"> rent
-    <option value="mortgage"> mortgage
-    <option value="travel"> travel
-    <option value="groceries"> groceries
-    <option value="food"> food 
-    <option value="miscellanous_exp"> miscellanous expense
-    </select>
-    <br><br>
-  
-    <strong>Message:</strong><br>
-    <input type="text" name="message" id="message" class="input-box"><br>
-  
-    <input type="submit" value="Add transaction(s)">
+      <strong>Expense category</strong><br>
+      <select class="form-control" name="expense_category" id="expense_category">
+      <option value="" > 
+      <option value="rent"> rent
+      <option value="mortgage"> mortgage
+      <option value="travel"> travel
+      <option value="groceries"> groceries
+      <option value="food"> food 
+      <option value="miscellanous_exp"> miscellanous expense
+      </select>
+    </div>
+  </div>
+
+  <div class="form-group col-md-4">
+    <div class="row g-3 align-items-center">
+      <strong>Message:</strong><br>
+      <input type="text" name="message" id="message" class="form-control"><br>
+    </div>
+  </div>
+  <div class="text-left">
+    <button type="submit" class="btn btn-secondary">Add transaction</button>  
     <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+  </div>
+</form>
   
     <p>{% with messages = get_flashed_messages() %}
       {% if messages %}
@@ -61,7 +71,10 @@
     </p>
   </form>
 
-<p>Or return to your budgets</p>
-<a href="/mybudgets"><input type="submit"value="Return to My Budgets"></a>
+<form class="form-inline" action="/mybudgets" method="GET">
+  <div class="text-left mt-1">
+    <button type="submit" class="btn btn-secondary">Return to my budgets</button>
+  </div>
+</form>
 
 {% endblock %}
