@@ -1,7 +1,7 @@
 """module app to run the app.py file and flask used to handle the routing of the application"""
 from flask import render_template, redirect, request, session, flash, url_for
 from app import app
-import users, budgets, userbudgets
+import users, budgets, userbudgets, services.budgetservice
 
 @app.route('/')
 def index():
@@ -141,10 +141,10 @@ def add_new_transactions(budget_id: int):
         income_category = request.form.get("income_category")
         expense_category = request.form.get("expense_category")
         message = request.form.get("message") 
-
-        if not income and not expense:
-            flash("Failed to submit the transaction, either income or expense has to be added.", 
-                  "error")
+       
+        is_valid, message = services.budgetservice.validate_transaction_fields(income, expense)
+        if not is_valid:
+            flash(message, "error")
             return redirect(f"/transactions?budget_id={session.get('budget_id')}")
 
         if userbudgets.add_transaction(budget_id, income, expense, income_category, 

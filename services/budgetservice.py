@@ -8,3 +8,17 @@ def process_fields(income, expense, income_category, expense_category, message):
     message = "Not selected" if not message or message.strip() == "" else message
     
     return income, expense, income_category, expense_category, message
+
+def validate_transaction_fields(income, expense):
+    """function to validate the transaction fields form."""
+    if not income and not expense:
+        return False, "Failed to submit the transaction, either income or expense has to be added."
+    
+    try:
+        #handling if the integer is negative or in case of value errors
+        if (income and float(income) < 0) or (expense and float(expense) < 0):
+            return False, "Negative values cannot be used when adding transactions."
+    except ValueError:
+        return False, "Please provide valid numbers for income or expense."
+
+    return True, ""
