@@ -140,14 +140,20 @@ def add_new_transactions(budget_id: int):
         expense = request.form.get("expense")
         income_category = request.form.get("income_category")
         expense_category = request.form.get("expense_category")
-        message = request.form.get("message")   
+        message = request.form.get("message") 
+
+        if not income and not expense:
+            flash("Failed to submit the transaction, either income or expense has to be added.", 
+                  "error")
+            return redirect(f"/transactions?budget_id={session.get('budget_id')}")
 
         if userbudgets.add_transaction(budget_id, income, expense, income_category, 
                                        expense_category, message):
             flash("Transaction added succesfully!", "success")
             return redirect(f"/transactions?budget_id={session.get('budget_id')}")
         else:
-            flash("Failed to add transaction. The entered amount exceeds the maximum limit of 2 147 483 647.", "error")
+            flash("Failed to add transaction. The entered amount exceeds the maximum limit of 2 147 483 647.", 
+                  "error")
             return redirect(f"/transactions?budget_id={session.get('budget_id')}")
         
     return render_template("transactions.html", budget_id=budget_id)

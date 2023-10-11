@@ -11,6 +11,16 @@
 <p>You don't need to add any + or - signs when inserting income or expense transactions.</p>
 <p>Once ready, click <b>"Add transaction"</b>.</p>
 
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    <div class="flash-messages">
+      {% for message in messages %}
+        <div class="alert alert-{{ message[1] }}"><b>{{ message }}</b></div>
+      {% endfor %}
+    </div>
+  {% endif %}
+{% endwith %}
+
 <form action="/transactions/{{ budget_id }}" method="POST">
   <div class="form-group col-4 mt-3">
     <div class="row g-3 align-items-center">
@@ -58,21 +68,9 @@
     <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
   </div>
 </form>
-  
-    <p>{% with messages = get_flashed_messages() %}
-      {% if messages %}
-        <div class="flash-messages">
-          {% for message in messages %}
-            <b><div class="alert alert-{{ message[1] }}">{{ message }}</div></b>
-          {% endfor %}
-        </div>
-      {% endif %}
-    {% endwith %}
-    </p>
-  </form>
 
 <form class="form-inline" action="/mybudgets" method="GET">
-  <div class="text-left mt-1">
+  <div class="text-left mt-2">
     <button type="submit" class="btn btn-secondary">Return to my budgets</button>
   </div>
 </form>

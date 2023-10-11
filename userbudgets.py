@@ -9,7 +9,7 @@ def add_transaction(budget_id: int, income: int, expense:int, income_category: s
     """function to add transactions continuously to selected budget"""
 
     try:
-        income, expense, income_category, expense_category, message = budgetservice.empty(
+        income, expense, income_category, expense_category, message = budgetservice.process_fields(
         income, expense, income_category, expense_category, message)
         
         sql = text("""
