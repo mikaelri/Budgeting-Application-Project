@@ -5,46 +5,52 @@
 
 <p>Below you can see a list of all users.</p>
 
-    <table>
-        <tr>
-            <th>ID</th>
-            <th>Username</th>
-            <th>Role</th>
-        </tr>
-        {% for user in users %}
-        <tr>
-        <td>{{ user.id }}</td>
-        <td>{{ user.username }}</td>
-        <td>{{ "Admin" if user.role == 2 else "Regular User" }}</td>
-        </tr>
-        {% endfor %}
-    </table>
+<p><table>
+    <tr>
+        <th>ID</th>
+        <th>Username</th>
+        <th>Role</th>
+    </tr>
+    {% for user in users %}
+    <tr>
+    <td>{{ user.id }}</td>
+    <td>{{ user.username }}</td>
+    <td>{{ "Admin" if user.role == 2 else "Regular User" }}</td>
+    </tr>
+    {% endfor %}
+</table></p>
+  
+<p>Admin users can delete selected budget(s).<br>
+Warning, once you hit the <b>"Delete"</b> button, the budget is gone.</p>
+<form class="form-inline" action="/admin" method="POST">
+  <div class="wrap-input">
+    <label for="budgetSelect"></label>
+    <select class="form-control" name="budget_id" id="budgetSelect">
+      {% for budget in budgets %}
+      <option value="{{ budget.id }}">{{ budget.name }}</option>
+      {% endfor %}
+    </select>
+    <button type="submit" class="btn btn-danger">Delete</button>
+  </div>
+  <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+</form>
     
-    <p>Admin users can delete selected budget, below.</p>
-    <form action="/admin" method="POST">
-        <label for="budgetSelect">Select a budget:</label>
-        <select name="budget_id" id="budgetSelect">
-        {% for budget in budgets %}
-            <option value="{{ budget.id }}">{{ budget.name }}</option>
+<p>{% with messages = get_flashed_messages() %}
+    {% if messages %}
+      <div class="flash-messages">
+        {% for message in messages %}
+          <strong><div class="alert alert-{{ message[1] }}">{{ message }}</div></strong>
         {% endfor %}
-        </select>
-        <input type="submit" value="Delete">
-        <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
-    </form>
-    
-    <p>{% with messages = get_flashed_messages() %}
-        {% if messages %}
-          <div class="flash-messages">
-            {% for message in messages %}
-              <strong><div class="alert alert-{{ message[1] }}">{{ message }}</div></strong>
-            {% endfor %}
-          </div>
-        {% endif %}
-      {% endwith %}
-      </p>
+      </div>
+    {% endif %}
+  {% endwith %}
+  </p>
 
-<p>To return to your personal page, press <strong>"Return to your personal page"</strong> button.</p>
-<a href="/login"><input type="submit" value="Return to your personal page"></a>
+<form class="form-inline" action="/login" method="GET">
+  <div class="text-left mt-1">
+    <button type="submit" class="btn btn-secondary">Return to your page</button>
+  </div>
+</form>
 
 {% endblock %}
 
