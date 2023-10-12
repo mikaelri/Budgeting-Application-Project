@@ -1,10 +1,11 @@
 {% extends "layout.html" %}
 {% block content %}
 
-<h2>Net result</h2>
-
 {% if selected_budget %}
-<p> Net result for selected budget <b>{{ selected_budget.name }}</b>: {{ net_result }}</p>
+
+<h2>Net result - {{ selected_budget.name }} budget</h2>
+
+<p> Net result for selected budget: {{ net_result }}</p>
 {% else %}
   <p>No budget selected.</p>
 {% endif %}
