@@ -140,6 +140,7 @@ def add_new_transactions(budget_id: int):
         return render_template("transactions.html")
 
     if request.method == "POST":
+        services.userservice.check_csrf()
 
         budget_id = session.get('budget_id')
         income = request.form.get("income")
