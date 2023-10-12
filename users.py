@@ -1,7 +1,7 @@
 """modules to create user log-in requirements"""
 import os
 from db import db
-from flask import abort, request, session
+from flask import session
 from sqlalchemy import text
 from werkzeug.security import check_password_hash, generate_password_hash
 
@@ -66,14 +66,3 @@ def get_user_list():
     sql = text("SELECT id, username, role FROM users")
     result = db.session.execute(sql).fetchall()
     return result
-
-def user_id():
-    return session.get("user_id", 0)
-
-def require_role(role: int):
-    if role > session.get("user_role", 0):
-        abort(403)
-
-def check_csrf():
-    if session["csrf_token"] != request.form["csrf_token"]:
-        abort(403)

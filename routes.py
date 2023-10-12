@@ -1,7 +1,7 @@
 """module app to run the app.py file and flask used to handle the routing of the application"""
 from flask import render_template, redirect, request, session, flash, url_for
 from app import app
-import users, budgets, userbudgets, services.budgetservice
+import users, budgets, userbudgets, services.budgetservice, services.userservice
 
 @app.route('/')
 def index():
@@ -15,7 +15,7 @@ def create_user():
         return render_template("register.html")
 
     if request.method == "POST":
-        users.check_csrf()
+        services.userservice.check_csrf()
 
         username = request.form["username"]
         password1 = request.form["password1"]
@@ -52,7 +52,7 @@ def login():
         return render_template("login.html")
 
     if request.method == "POST":
-        users.check_csrf()
+        services.userservice.check_csrf()
 
         username = request.form["username"]
         password = request.form["password1"]
@@ -81,7 +81,7 @@ def create_new_budget():
         return render_template("budget.html")
 
     if request.method == "POST":
-        users.check_csrf()
+        services.userservice.check_csrf()
 
         name = request.form["name"]
         if len(name) < 1 or len(name) > 25:
@@ -141,7 +141,7 @@ def add_new_transactions(budget_id: int):
         return render_template("transactions.html")
 
     if request.method == "POST":
-        users.check_csrf()
+        services.userservice.check_csrf()
 
         budget_id = session.get('budget_id')
         income = request.form.get("income")
@@ -195,8 +195,9 @@ def admin_list():
            
     """Remove existing budget if there is at least 1 budget created"""
     if request.method == "POST":
-        users.check_csrf()
-        
+        services.userservice.require_role(2)
+        services.userservice.check_csrf()
+
         creator_id = session.get("user_id")
         budget_count = budgets.get_budget_count(creator_id)
 
