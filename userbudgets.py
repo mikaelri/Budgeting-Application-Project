@@ -1,7 +1,7 @@
 #module to handle users budget functions from the user view
 from db import db
 from sqlalchemy import text
-import services.budgetservice as budgetservice
+import services
 
 
 def add_transaction(budget_id: int, income: int, expense:int, income_category: str, 
@@ -9,7 +9,7 @@ def add_transaction(budget_id: int, income: int, expense:int, income_category: s
     """function to add transactions continuously to selected budget"""
 
     try:
-        income, expense, income_category, expense_category, message = budgetservice.process_fields(
+        income, expense, income_category, expense_category, message = services.budgetservice.process_fields(
         income, expense, income_category, expense_category, message)
         
         sql = text("""
@@ -114,6 +114,28 @@ def delete_budget(budget_id: int):
         db.session.execute(sql_budgets, {"budget_id":budget_id})
         db.session.commit()
 
+        return True
+    except:
+        return False
+    
+def search_income(income_category):
+    """function to search transactions based on income category"""
+    
+    try:
+        """search based on income_category"""
+        sql_income = text("SEARCH from transactions WHERE income_category=:income_category")
+        db.session.execute(sql_income, {"income_category": income_category})
+        db.session.commit
+        return True
+    except:
+        return False
+
+def search_expense(expense_category):
+    """function to search transactions based on expense category"""
+    try:
+        sql_expense = text("SEARCH from transactions WHERE expense_category=:expense_category")
+        db.session.execute(sql_expense, {"expense_category": expense_category})
+        db.session.commit
         return True
     except:
         return False

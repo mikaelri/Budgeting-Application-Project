@@ -21,4 +21,4 @@ def validate_transaction_fields(income, expense):
     except ValueError:
         return False, "Please provide valid numbers for income or expense."
 
-    return True, ""
+    return True

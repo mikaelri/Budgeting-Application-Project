@@ -140,7 +140,6 @@ def add_new_transactions(budget_id: int):
         return render_template("transactions.html")
 
     if request.method == "POST":
-        services.userservice.check_csrf()
 
         budget_id = session.get('budget_id')
         income = request.form.get("income")
@@ -149,9 +148,9 @@ def add_new_transactions(budget_id: int):
         expense_category = request.form.get("expense_category")
         message = request.form.get("message") 
        
-        is_valid, message = services.budgetservice.validate_transaction_fields(income, expense)
+        is_valid = services.budgetservice.validate_transaction_fields(income, expense)
         if not is_valid:
-            flash(message, "error")
+            flash("Not valid", "error")
             return redirect(f"/transactions?budget_id={session.get('budget_id')}")
 
         if userbudgets.add_transaction(budget_id, income, expense, income_category, 
@@ -212,7 +211,7 @@ def admin_list():
             return redirect("/admin")     
 
 @app.route("/usersearch", methods= ["GET"])
-def search_transactions():
+def route_search():
     """Routes to usersearch page and functionalities"""
     budget_id = request.args.get("budget_id")
         
@@ -221,5 +220,9 @@ def search_transactions():
 
     return render_template("usersearch.html", 
                            selected_budget=select_budget, budget_id=budget_id)
+
+def search_transactions():
+    """function to search transactions based on income or expense category"""
+    pass
 
     
