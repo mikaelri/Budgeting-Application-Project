@@ -149,9 +149,9 @@ def add_new_transactions(budget_id: int):
         expense_category = request.form.get("expense_category")
         message = request.form.get("message") 
        
-        is_valid = services.budgetservice.validate_transaction_fields(income, expense)
+        is_valid, error_message= services.budgetservice.validate_transaction_fields(income, expense)
         if not is_valid:
-            flash("Not valid", "error")
+            flash(error_message, "error")
             return redirect(f"/transactions?budget_id={session.get('budget_id')}")
 
         if userbudgets.add_transaction(budget_id, income, expense, income_category, 
