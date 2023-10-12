@@ -54,7 +54,7 @@ def login():
         password = request.form["password1"]
 
     if not users.login(username, password):
-        return render_template("error.html", message="Wrong username or password")
+        return render_template("error.html", message="Wrong username, password or no user created.")
     
     """store the user role in session if the login was succesful"""
     user_id = session.get("user_id")
