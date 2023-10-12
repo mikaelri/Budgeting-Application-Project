@@ -11,6 +11,7 @@
         <th scope="col">ID</th>
         <th scope="col">Username</th>
         <th scope="col">Role</th>
+        <th scope="col">Budget name</th>
     </tr>
   </thead>
 
@@ -20,6 +21,9 @@
       <td>{{ user.id }}</td>
       <td>{{ user.username }}</td>
       <td>{{ "Admin" if user.role == 2 else "Regular User" }}</td>
+      {% with budget = budgets[loop.index0] if budgets|length > loop.index0 else None %}
+      <td>{{ "No budgets created" if not budget or budget.name|length == 0 else budget.name }}</td>
+      {% endwith %}
     </tr>
     {% endfor %}
   </tbody>

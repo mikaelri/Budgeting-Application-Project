@@ -190,13 +190,15 @@ def admin_list():
         creator_id = session.get("user_id")
         budget_count = budgets.get_budget_count(creator_id)
 
-        if budget_count < 1:
-            flash ("Delete not succesful, you cannot delete other users budget.", "error")
-            return redirect("/admin")
-
         budget_id = request.form.get("budget_id")
         success = userbudgets.delete_budget(budget_id)
 
-        if success:
-            flash ("Budget was removed succesfully!", "success")
-            return redirect("/admin")
+        if not budget_count:
+            flash ("No budgets to delete.", "error")        
+            return redirect("/admin")   
+        
+        elif success:
+            flash ("Budget was removed successfully!", "success") 
+            return redirect("/admin")     
+
+    
