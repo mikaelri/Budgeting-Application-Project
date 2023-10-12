@@ -1,0 +1,18 @@
+{% extends "layout.html" %}
+{% block content %}
+
+{% if selected_budget %}
+
+<h2>Search transactions - {{ selected_budget.name }} budget</h2>
+
+{% endif %}
+
+<p>In this page you can search transactions based on income or expense category.</p>
+
+<form class="form-inline" action="/mybudgets" method="GET">
+  <div class="text-left mt-1">
+    <button type="submit" class="btn btn-secondary">Return to My Budgets</button>
+  </div>
+</form>
+
+{% endblock %}

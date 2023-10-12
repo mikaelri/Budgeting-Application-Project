@@ -211,4 +211,15 @@ def admin_list():
             flash ("Budget was removed successfully!", "success") 
             return redirect("/admin")     
 
+@app.route("/usersearch", methods= ["GET"])
+def search_transactions():
+    """Routes to usersearch page and functionalities"""
+    budget_id = request.args.get("budget_id")
+        
+    budget_id = int(budget_id)
+    select_budget = budgets.get_budget_id(budget_id)
+
+    return render_template("usersearch.html", 
+                           selected_budget=select_budget, budget_id=budget_id)
+
     
