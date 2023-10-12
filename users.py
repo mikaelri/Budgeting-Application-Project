@@ -52,17 +52,6 @@ def user_exists(username: str):
     else:
         return False
 
-def user_id():
-    return session.get("user_id", 0)
-
-def require_role(role: int):
-    if role > session.get("user_role", 0):
-        abort(403)
-
-def check_csrf():
-    if session["csrf_token"] != request.form["csrf_token"]:
-        abort(403)
-
 def get_user_role(user_id: int):
     """function to get the user role for session"""
     sql = text("SELECT role FROM users WHERE id=:user_id")
@@ -77,3 +66,14 @@ def get_user_list():
     sql = text("SELECT id, username, role FROM users")
     result = db.session.execute(sql).fetchall()
     return result
+
+def user_id():
+    return session.get("user_id", 0)
+
+def require_role(role: int):
+    if role > session.get("user_role", 0):
+        abort(403)
+
+def check_csrf():
+    if session["csrf_token"] != request.form["csrf_token"]:
+        abort(403)
