@@ -52,7 +52,6 @@ def login():
         return render_template("login.html")
 
     if request.method == "POST":
-        services.userservice.check_csrf()
 
         username = request.form["username"]
         password = request.form["password1"]
