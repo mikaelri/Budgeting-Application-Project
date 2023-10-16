@@ -15,7 +15,6 @@ def create_user():
         return render_template("register.html")
 
     if request.method == "POST":
-        services.userservice.check_csrf()
 
         username = request.form["username"]
         password1 = request.form["password1"]
