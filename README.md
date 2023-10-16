@@ -68,7 +68,7 @@ pip install -r ./requirements.txt
 ```
 psql < schema.sql
 ```
-**5. If the previous  command gives connection error, you can first activate database session and re run previous command (however this propably is not needed):**
+**5. If the previous  command gives connection error, you can first activate database session and re run previous command in a new terminal windon (however this propably is not needed):**
 ```
 start-pg.sh
 ```
