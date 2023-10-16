@@ -68,8 +68,11 @@ pip install -r ./requirements.txt
 ```
 psql < schema.sql
 ```
-
-**5. Start the application with command:**
+**5. If the previous  command gives connection error, you can first activate database session and re run previous command (however this propably is not needed):**
+```
+start-pg.sh
+```
+**6. Start the application with command:**
 
 ```
 flask run
