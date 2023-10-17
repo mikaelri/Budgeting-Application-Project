@@ -1,0 +1,29 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<h2>List of transactions for selected category</h2>
+
+<p><table class="table-sm table-borderless">
+    <thead class="thead">
+      <tr>
+          <th scope="col">Income</th>
+          <th scope="col">Income category</th>
+          <th scope="col">Expense</th>
+          <th scope="col">Expense category</th>
+          <th scope="col">Message</th>
+      </tr>
+    </thead>
+  
+    <tbody>
+      {% for user in users %}
+      <tr>
+        <td>{{ user.id }}</td>
+        <td>{{ user.username }}</td>
+        <td>{{ "Admin" if user.role == 2 else "Regular User" }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table></p>
+
+
+{% endblock %}

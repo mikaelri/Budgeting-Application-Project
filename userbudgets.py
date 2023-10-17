@@ -118,24 +118,4 @@ def delete_budget(budget_id: int):
     except:
         return False
     
-def search_income(income_category):
-    """function to search transactions based on income category"""
-    
-    try:
-        """search based on income_category"""
-        sql_income = text("SEARCH from transactions WHERE income_category=:income_category")
-        db.session.execute(sql_income, {"income_category": income_category})
-        db.session.commit
-        return True
-    except:
-        return False
 
-def search_expense(expense_category):
-    """function to search transactions based on expense category"""
-    try:
-        sql_expense = text("SEARCH from transactions WHERE expense_category=:expense_category")
-        db.session.execute(sql_expense, {"expense_category": expense_category})
-        db.session.commit
-        return True
-    except:
-        return False

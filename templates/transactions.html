@@ -9,7 +9,9 @@
 
 <p>Below you can add transactions to your selected budget.</p>
 <p>You don't need to add any + or - signs when inserting income or expense transactions.</p>
-<p>Once ready, click <b>"Add transaction"</b>.</p>
+<p>Once ready, click <b>Add transaction</b>.</p>
+
+<p> Please note that the <b>required</b> fields are either income or expense and the related category.</p>
 
 {% with messages = get_flashed_messages() %}
   {% if messages %}
@@ -34,7 +36,7 @@
       <option value="" > 
       <option value="salary"> salary
       <option value="study grant"> study grant
-      <option value="miscellanous_inc"> miscellanous income
+      <option value="other"> other
       </select>
     </div>
   </div>
@@ -52,7 +54,7 @@
       <option value="travel"> travel
       <option value="groceries"> groceries
       <option value="food"> food 
-      <option value="miscellanous_exp"> miscellanous expense
+      <option value="other"> other
       </select>
     </div>
   </div>

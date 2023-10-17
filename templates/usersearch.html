@@ -9,7 +9,31 @@
 
 <p>In this page you can search transactions based on income or expense category.</p>
 
-<p> Page is still work in progress</p>
+Select a category type below on which you want to search the transactions.<br>
+The dropdown menu shows only those categories you have used in your budget.
+<p>
+<form class="form-inline" action="/categorylisting" method="GET">
+  <div class="wrap-input">
+    <label for="categorySelect"></label>
+    <select class="form-control" name="category" id="categorySelect" required>
+
+      <optgroup label="Income Categories">
+        {% for category in income_category %}
+          <option value="{{ category.name }}">{{ category.name }}</option>
+        {% endfor %}
+      </optgroup>
+
+      <optgroup label="Expense Categories">
+        {% for category in expense_category %}
+        <option value="{{ category.name }}">{{ category.name }}</option>
+        {% endfor %} 
+      </optgroup>
+    </select>
+
+    <button type="submit" class="btn btn-secondary mt-1">Search</button>
+  </div>
+</form>
+</p>
 
 <form class="form-inline" action="/mybudgets" method="GET">
   <div class="text-left mt-1">

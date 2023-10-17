@@ -22,3 +22,9 @@ def validate_transaction_fields(income, expense):
         return False, "Please provide valid numbers for income or expense."
 
     return True, ""
+
+def validate_category(income_category, expense_cateogry):
+    if not income_category and not expense_cateogry:
+        return False, "Failed to submit the transaction, either income or expense category has to be added"
+    
+    return True, ""
