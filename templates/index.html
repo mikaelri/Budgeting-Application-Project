@@ -14,6 +14,16 @@ Use it for monthly income and expense analysis or create a budget for your holid
 
 <p>To login, please fill your username and password and press <b>Login</b> button.</p>
 
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    <div class="flash-messages">
+      {% for message in messages %}
+        <div class="alert alert-{{ message[1] }}"><b>{{ message }}</b></div>
+      {% endfor %}
+    </div>
+  {% endif %}
+{% endwith %}
+
 <form action="/login" method="POST">
     <div class="form-group col-md-4">
         <div class="row g-3 align-items-center">

@@ -22,26 +22,33 @@ def create_user():
         role = request.form["role"]
 
         if len(username) < 1 or len(username) > 25:
-            return render_template("error.html", message="Username should be between 1-25 characters.")
+            flash("Username should be between 1-25 characters.")
+            return render_template("register.html")
         
         if users.user_exists(username):
-            return render_template("error.html", message="Username is already taken.")
+            flash("Username is already taken.")
+            return render_template("register.html")
         
         if len(password1) < 5 or len(password1) > 25:
-            return render_template("error.html", message="Password should be between 5-25 characters.")
+            flash("Password should be between 5-25 characters.")
+            return render_template("register.html")
         if password1 != password2:
-            return render_template("error.html", message="Given passwords are not the same")
+            flash("Given passwords are not the same.")
+            return render_template("register.html")
         if password1 == "":
-            return render_template("error.html", message="Password is empty")
+            flash("Password is empty.")
+            return render_template("register.html")
     
         if role not in ("1", "2"):
-            return render_template("error.html", message="Unknown user type")
+            flash("Unknown user type.")
+            return render_template("register.html")
         
         if not users.create_user(username, password1, role):
-            return render_template("error.html", message="Registration not succesfull, check username and password")
+            flash("Registration not succesfull, check username and password.")
+            return render_template("register.html")
         
-        flash("User created succesfully!", "success")
-        return redirect("/register")
+        flash("User created succesfully, you can login now!", "success")
+        return redirect("/")
     return render_template("register.html")
 
 @app.route("/login", methods=["GET", "POST"])
@@ -98,8 +105,8 @@ def create_new_budget():
             return redirect("/budget")
 
         if budgets.new_budget(name, creator_id): 
-            flash("Budget created successfully!", "success")
-            return redirect("/budget")
+            flash("Budget created successfully, you can now add transactions to it!", "success")
+            return redirect("/login")
         else:
             flash("Failed to create the budget, try again!")
             return redirect("/budget")
@@ -195,6 +202,9 @@ def admin_list():
     if request.method == "POST":
         services.userservice.require_role(2)
         services.userservice.check_csrf()
+        
+        user_id = services.userservice.user_id()
+        username = users.get_username(user_id)
 
         creator_id = session.get("user_id")
         budget_count = budgets.get_budget_count(creator_id)
@@ -206,8 +216,8 @@ def admin_list():
             flash ("No budgets to delete.", "error")        
             return redirect("/admin")   
         
-        elif success:
-            flash ("Budget was removed successfully!", "success") 
+        if success:
+            flash (f"Budget was removed successfully! You deleted a budget from {username}", "success") 
             return redirect("/admin")     
 
 @app.route("/usersearch", methods= ["GET"])

@@ -66,3 +66,11 @@ def get_user_list():
     sql = text("SELECT id, username, role FROM users")
     result = db.session.execute(sql).fetchall()
     return result
+
+def get_username(user_id: int):
+    """function to get username based on user id"""
+    sql = text("SELECT username FROM users WHERE id=:user_id")
+    result = db.session.execute(sql, {"user_id": user_id}).fetchone()
+    if result:
+        return result[0]
+    return None

@@ -44,14 +44,12 @@ Please fill in the details below to create a new user account.<br>
 <p>From the front page you can log in to your account and start using SpendManager!</p>
   <div class="text-left">
     <button type="submit" class="btn btn-secondary">Confirm registration</button>     
-    <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
   </div>
 </form> 
 
 <form class="form-inline" action="/" method="GET">
   <div class="text-left">
     <button type="submit" class="btn btn-secondary mt-3">Go to front page</button>
-    <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
   </div>
 </form>
 
