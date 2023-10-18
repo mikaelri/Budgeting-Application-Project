@@ -223,8 +223,7 @@ def admin_list():
 
         success = userbudgets.delete_budget(budget_id)
         if success:
-            flash (f"Budget was removed successfully! You deleted a budget from username 
-                   {creator_name}", "success") 
+            flash (f"Budget was removed successfully! You deleted a budget from username {creator_name}", "success") 
             return redirect("/admin")     
         else:
             flash ("Failed to delete the budget, try again.", "error")  
