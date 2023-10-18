@@ -1,7 +1,7 @@
 """module app to run the app.py file and flask used to handle the routing of the application"""
 from flask import render_template, redirect, request, session, flash, url_for
 from app import app
-import users, budgets, userbudgets, services.budgetservice, services.userservice
+import users, budgets, userbudgets, usersearch, services.budgetservice, services.userservice
 
 @app.route('/')
 def index():
@@ -159,6 +159,13 @@ def add_new_transactions(budget_id: int):
         if not is_valid:
             flash(error_message, "error")
             return redirect(f"/transactions?budget_id={session.get('budget_id')}")
+        
+        is_category, error_message= services.budgetservice.validate_category(income, expense, 
+                                    income_category, expense_category)
+        if not is_category:
+            flash(error_message, "error")
+            return redirect(f"/transactions?budget_id={session.get('budget_id')}")
+
 
         if userbudgets.add_transaction(budget_id, income, expense, income_category, 
                                        expense_category, message):
@@ -182,7 +189,8 @@ def view_net_result():
     net_result = userbudgets.calculate_net_result(budget_id)
 
     return render_template("netresult.html", 
-                           selected_budget=select_budget, budget_id=budget_id, net_result=net_result)
+                           selected_budget=select_budget, budget_id=budget_id, 
+                           net_result=net_result)
 
 @app.route("/admin", methods=["GET", "POST"])
 def admin_list():
@@ -198,41 +206,59 @@ def admin_list():
             flash("Access denied. The page is only for admin users.", "error")
             return redirect("/login")
            
-    """Remove existing budget if there is at least 1 budget created"""
+    """Remove existing budget if exists"""
     if request.method == "POST":
         services.userservice.require_role(2)
         services.userservice.check_csrf()
-        
-        user_id = services.userservice.user_id()
-        username = users.get_username(user_id)
-
-        creator_id = session.get("user_id")
-        budget_count = budgets.get_budget_count(creator_id)
 
         budget_id = request.form.get("budget_id")
-        success = userbudgets.delete_budget(budget_id)
 
-        if not budget_count:
-            flash ("No budgets to delete.", "error")        
-            return redirect("/admin")   
-        
+        creator_id = userbudgets.get_budget_creator(budget_id)
+        creator_name = users.get_username(creator_id)
+
+        budget_exists = userbudgets.check_budget_exists(budget_id)
+        if not budget_exists:
+            flash ("No budgets to delete.", "error")  
+            return redirect("/admin")  
+
+        success = userbudgets.delete_budget(budget_id)
         if success:
-            flash (f"Budget was removed successfully! You deleted a budget from {username}", "success") 
+            flash (f"Budget was removed successfully! You deleted a budget from username 
+                   {creator_name}", "success") 
             return redirect("/admin")     
+        else:
+            flash ("Failed to delete the budget, try again.", "error")  
+            return redirect("/admin")  
+
 
 @app.route("/usersearch", methods= ["GET"])
 def route_search():
     """Routes to usersearch page and functionalities"""
     budget_id = request.args.get("budget_id")
+
+    income_category = usersearch.view_income_category(budget_id)
+    expense_category = usersearch.view_expense_category(budget_id)
         
     budget_id = int(budget_id)
     select_budget = budgets.get_budget_id(budget_id)
 
     return render_template("usersearch.html", 
-                           selected_budget=select_budget, budget_id=budget_id)
+                           selected_budget=select_budget, budget_id=budget_id, 
+                           income_category=income_category, expense_category=expense_category)
 
+
+@app.route("/categorylisting", methods= ["GET"])
 def search_transactions():
-    """function to search transactions based on income or expense category"""
-    pass
+    """Routes to categorylisting page and shows the transactions for selected category"""
+    budget_id = request.args.get("budget_id")
+    budget_id = int(request.args.get("budget_id"))
+    category = request.args.get("category")
+
+    if category:
+        transactions = usersearch.search_by_category(budget_id, category)
+        return render_template("categorylisting.html", transactions=transactions)
 
     
+    return render_template("categorylisting.html")
+
+

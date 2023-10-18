@@ -20,9 +20,7 @@ def budget_exists(name: str):
 
     if existing_budget:
         return True
-    else:
-        return False
-
+    
 def see_budgets(creator_id: int):
     """function to view budgets"""
     sql = text("SELECT id, name FROM budgets WHERE creator_id=:creator_id")

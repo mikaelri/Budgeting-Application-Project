@@ -118,4 +118,23 @@ def delete_budget(budget_id: int):
     except:
         return False
     
+def check_budget_exists(budget_id: int):
+    """function to check if budget exists"""
+    sql = text("SELECT id from budgets WHERE id=:budget_id")
+    result = db.session.execute(sql, {"budget_id": budget_id})
+    existing_budget = result.fetchone()
 
+    if existing_budget:
+        return True
+    else:
+        return False
+
+def get_budget_creator(budget_id: int):
+    """function to get the creator of a budget based on ID"""
+    sql = text("SELECT creator_id FROM budgets WHERE id=:budget_id")
+    result = db.session.execute(sql, {"budget_id": budget_id})
+    creator = result.fetchone()
+    if creator:
+        return creator[0]
+    else:
+        return None
