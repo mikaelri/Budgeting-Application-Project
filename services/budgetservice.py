@@ -23,8 +23,8 @@ def validate_transaction_fields(income, expense):
 
     return True, ""
 
-def validate_category(income_category, expense_cateogry):
-    if not income_category and not expense_cateogry:
-        return False, "Failed to submit the transaction, either income or expense category has to be added"
+def validate_category(income, expense, income_category, expense_category):
+    if (income and not income_category) or (expense and not expense_category):
+        return False, "Failed to submit the transaction, please select income or expense and related category."
     
     return True, ""
