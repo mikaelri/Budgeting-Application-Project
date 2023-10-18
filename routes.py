@@ -136,7 +136,6 @@ def select_budget():
 @app.route("/transactions/<int:budget_id>", methods=["GET", "POST"])
 def add_new_transactions(budget_id: int):
     """function to add continously transactions to a selected budget"""
-
     session['budget_id'] = budget_id
 
     if request.method == "GET":
@@ -178,12 +177,11 @@ def add_new_transactions(budget_id: int):
         
     return render_template("transactions.html", budget_id=budget_id)
 
-@app.route("/netresult", methods=["GET"])
+@app.route("/netresult", methods=["POST"])
 def view_net_result():
     """function to show the net result for selected budget"""
-    budget_id = request.args.get("budget_id")
-        
-    budget_id = int(budget_id)
+    budget_id = request.form.get("budget_id")
+
     select_budget = budgets.get_budget_id(budget_id)
     
     net_result = userbudgets.calculate_net_result(budget_id)
@@ -230,15 +228,15 @@ def admin_list():
             return redirect("/admin")  
 
 
-@app.route("/usersearch", methods= ["GET"])
+@app.route("/usersearch", methods= ["POST"])
 def route_search():
     """Routes to usersearch page and functionalities"""
-    budget_id = request.args.get("budget_id")
+    services.userservice.check_csrf()
+    budget_id = request.form.get('budget_id')
 
     income_category = usersearch.view_income_category(budget_id)
     expense_category = usersearch.view_expense_category(budget_id)
         
-    budget_id = int(budget_id)
     select_budget = budgets.get_budget_id(budget_id)
 
     return render_template("usersearch.html", 
@@ -249,8 +247,7 @@ def route_search():
 @app.route("/categorylisting", methods= ["GET"])
 def search_transactions():
     """Routes to categorylisting page and shows the transactions for selected category"""
-    budget_id = request.args.get("budget_id")
-    budget_id = int(request.args.get("budget_id"))
+    budget_id = session.get('budget_id')
     category = request.args.get("category")
 
     if category:
@@ -259,5 +256,3 @@ def search_transactions():
 
     
     return render_template("categorylisting.html")
-
-
