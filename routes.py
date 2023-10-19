@@ -194,12 +194,12 @@ def add_new_transactions(budget_id: int):
         expense_category = request.form.get("expense_category")
         message = request.form.get("message") 
        
-        is_valid, error_message= services.budgetservice.validate_transaction_fields(income, expense)
+        is_valid, error_message = services.budgetservice.validate_transaction_fields(income, expense)
         if not is_valid:
             flash(error_message, "error")
             return redirect(f"/profile/mybudgets/addtransactions?budget_id={session.get('budget_id')}")
         
-        is_category, error_message= services.budgetservice.validate_category(income, expense, 
+        is_category, error_message = services.budgetservice.validate_category(income, expense, 
                                     income_category, expense_category)
         if not is_category:
             flash(error_message, "error")
@@ -220,6 +220,7 @@ def add_new_transactions(budget_id: int):
 @app.route("/profile/mybudgets/netresult", methods=["POST"])
 def view_net_result():
     """function to show the net result for selected budget"""
+    services.userservice.check_csrf()
     budget_id = request.form.get("budget_id")
     select_budget = budgets.get_budget_id(budget_id)
     net_result = userbudgets.calculate_net_result(budget_id)
