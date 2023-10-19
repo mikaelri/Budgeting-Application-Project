@@ -5,7 +5,7 @@ import users, budgets, userbudgets, usersearch, services.budgetservice, services
 
 @app.route('/')
 def index():
-    """Function for index page"""
+    """Function routing to login page"""
     return redirect("/login")
 
 @app.route("/register", methods=["GET", "POST"])
@@ -53,7 +53,7 @@ def create_user():
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
-    """Function handling the log-in"""
+    """Function handling the login"""
     if request.method == "GET":
         return render_template("login.html")
 
@@ -65,11 +65,13 @@ def login():
     if not users.login(username, password):
         return render_template("error.html", message="Wrong username, password or no user created.")
 
-    """store the user role in session if the login was succesful"""
+    """store the user role and creator_id in session if the login was succesful"""
     user_id = session.get("user_id")
     user_role = users.get_user_role(user_id)
+    session["creator_id"] = user_id
     if user_role:
         session["role"] = user_role
+
     return redirect("/profile")
     
 @app.route("/logout")
@@ -80,7 +82,7 @@ def logout():
 
 @app.route("/profile", methods=["GET"])
 def profile():
-    """function to view the profile"""
+    """function to view the profile page"""
     return render_template("profile.html")
 
 @app.route("/profile/admin", methods=["GET", "POST"])
@@ -165,57 +167,83 @@ def view_budgets():
             
     return render_template("mybudgets.html", budgets=budgets_list)
 
-@app.route("/profile/mybudgets/addtransactions", methods=["GET"])
-def select_budget():
-    """function to select the budget where user wants to add income or expense transactions"""
-    budget_id = request.args.get("budget_id")
+@app.route("/profile/mybudgets/addtransactions", methods=["GET", "POST"])
+def add_new_transactions():
+    """add transactions to a selected budget"""
+    print(request.method) #debug print to be deleted
+
+    #store the budget_id in session
+    if 'budget_id' in request.form:
+        budget_id = request.form['budget_id']
+        session['budget_id'] = budget_id
+
+    #get the budget_id for the session and check that it exists or is valid
+    budget_id = session.get("budget_id")
+    print("Budget_id:", budget_id) #debug print to be deleted
+    if not budget_id:
+        flash("Not a valid budget id, please try again")
+        return redirect("/profile/mybudgets")
+    
+    #fetch the budget details for the session budget_id
     selected_budget = budgets.get_budget_id(budget_id)
+    if not selected_budget:
+        flash("Error, the selected budget does not exist")
+        return redirect("/profile/mybudgets")
 
-    return render_template("addtransactions.html", selected_budget=selected_budget, budget_id=budget_id)
-
-@app.route("/profile/mybudgets/addtransactions/<int:budget_id>", methods=["GET", "POST"])
-def add_new_transactions(budget_id: int):
-    """function to add continously transactions to a selected budget"""
-    session['budget_id'] = budget_id
-
-    if request.method == "GET":
-        budget_id = request.args.get("budget_id")
-        if budget_id:
-            session['budget_id'] = budget_id
-        return render_template("addtransactions.html")
-
+    #check that the session creator is the creator of the budget
+    creator_id = session.get("creator_id")
+    print("Session creator_id:", creator_id) #debug print to be deleted
+    print("Selected budget's creator_id:", selected_budget.creator_id) #debug print to be deleted
+    if selected_budget.creator_id != creator_id:
+        flash("Error, please use the budgets you have created")
+        return redirect("/profile/mybudgets")
+    
     if request.method == "POST":
+        print("Inside POST branch")
         services.userservice.check_csrf()
 
-        budget_id = session.get('budget_id')
         income = request.form.get("income")
         expense = request.form.get("expense")
         income_category = request.form.get("income_category")
         expense_category = request.form.get("expense_category")
         message = request.form.get("message") 
        
+        #must have income or expense inserted
         is_valid, error_message = services.budgetservice.validate_transaction_fields(income, expense)
         if not is_valid:
+            print("Validation Result:", is_valid, error_message) #debug print to be deleted
             flash(error_message, "error")
-            return redirect(f"/profile/mybudgets/addtransactions?budget_id={session.get('budget_id')}")
+            return redirect("/profile/mybudgets/addtransactions")
         
+        #must have income or expense and the associated category
         is_category, error_message = services.budgetservice.validate_category(income, expense, 
                                     income_category, expense_category)
         if not is_category:
             flash(error_message, "error")
-            return redirect(f"/profile/mybudgets/addtransactions?budget_id={session.get('budget_id')}")
-
-
+            return redirect("/profile/mybudgets/addtransactions")
+        
         if userbudgets.add_transaction(budget_id, income, expense, income_category, 
                                        expense_category, message):
             flash("Transaction added succesfully!", "success")
-            return redirect(f"/profile/mybudgets/addtransactions?budget_id={session.get('budget_id')}")
+            return redirect("/profile/mybudgets/addtransactions")
         else:
             flash("Failed to add transaction. The entered amount exceeds the maximum limit of 2 147 483 647.", 
                   "error")
-            return redirect(f"/profile/mybudgets/addtransactions?budget_id={session.get('budget_id')}")
+            return redirect("/profile/mybudgets/addtransactions")
         
-    return render_template("addtransactions.html", budget_id=budget_id)
+        
+    return render_template("addtransactions.html", budget_id=budget_id, selected_budget=selected_budget)
+
+
+
+
+
+
+
+
+
+
+
 
 @app.route("/profile/mybudgets/netresult", methods=["POST"])
 def view_net_result():

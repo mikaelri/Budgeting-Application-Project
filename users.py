@@ -25,6 +25,8 @@ def logout():
     del session["user_id"]
     del session["user_username"]
     del session["user_role"]
+    del session["budget_id"]
+    del session["creator_id"]
 
 def create_user(username: str, password: str, role: int):
     """function for registering a new user to database"""

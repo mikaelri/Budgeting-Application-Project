@@ -3,9 +3,18 @@
 
 <h2>Your Budgets</h2>
 
-Select in which budget you want to add income or expense transactions and click <b>"Add transactions"</b>.
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    <div class="flash-messages">
+      {% for message in messages %}
+        <div class="alert alert-{{ message[1] }}"><b>{{ message }}</b></div>
+      {% endfor %}
+    </div>
+  {% endif %}
+{% endwith %}
 
-<form class="form-inline" action="/profile/mybudgets/addtransactions" method="GET">
+Select in which budget you want to add income or expense transactions and click <b>"Add transactions"</b>.
+<form class="form-inline" action="/profile/mybudgets/addtransactions" method="POST">
   <div class="wrap-input">
     <label for="budgetSelect"></label>
     <select class="form-control" name="budget_id" id="budgetSelect">

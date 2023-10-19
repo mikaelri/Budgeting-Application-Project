@@ -37,7 +37,7 @@ def get_budget_count(creator_id: int):
 
 def get_budget_id(budget_id: int):
     """function to get the budget id's. Used in select_budget function"""
-    sql = text("SELECT id, name FROM budgets WHERE id=:budget_id")
+    sql = text("SELECT id, name, creator_id FROM budgets WHERE id=:budget_id")
     result = db.session.execute(sql, {"budget_id":budget_id})
     budget = result.fetchone()
     return budget
