@@ -27,7 +27,7 @@
   
 <p>Admin users can delete selected budget(s).<br>
 Warning, once you hit the <b>"Delete"</b> button, the budget is gone.</p>
-<form class="form-inline" action="/admin" method="POST">
+<form class="form-inline" action="/profile/admin" method="POST">
   <div class="wrap-input">
     <label for="budgetSelect"></label>
     <select class="form-control" name="budget_id" id="budgetSelect">
@@ -51,7 +51,7 @@ Warning, once you hit the <b>"Delete"</b> button, the budget is gone.</p>
   {% endwith %}
   </p>
 
-<form class="form-inline" action="/login" method="GET">
+<form class="form-inline" action="/profile" method="GET">
   <div class="text-left mt-1">
     <button type="submit" class="btn btn-secondary">Return to your page</button>
   </div>

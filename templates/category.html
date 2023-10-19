@@ -1,9 +1,17 @@
 {% extends "layout.html" %}
 {% block content %}
 
-<h2>List of transactions for selected category</h2>
+{% if selected_budget %}
 
-<form action="/categorylisting" method="GET">
+<h2>List of transactions</h2>
+
+<b>Selected budget:</b> {{ selected_budget.name }}<br>
+
+<b>Selected category:</b> {{ category }}<br>
+
+{% endif %}
+
+<form action="/profile/mybudgets/searchtransactions/category" method="GET">
 <p><table class="table-sm table-borderless">
     <thead class="thead">
       <tr>
@@ -27,6 +35,12 @@
       {% endfor %}
     </tbody>
   </table></p>
+</form>
+
+<form class="form-inline" action="/profile/mybudgets" method="GET">
+  <div class="text-left mt-1">
+    <button type="submit" class="btn btn-secondary">Return to your page</button>
+  </div>
 </form>
 
 {% endblock %}

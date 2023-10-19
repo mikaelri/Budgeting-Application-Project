@@ -10,9 +10,11 @@
 <p>In this page you can search transactions based on income or expense category.</p>
 
 Select a category type below on which you want to search the transactions.<br>
-The dropdown menu shows only those categories you have used in your budget.
+The dropdown menu shows only those categories you have used in your budget.<br>
+If there is no categories, you need to first add transactions, so just start using the application!
+
 <p>
-<form class="form-inline" action="/categorylisting" method="GET">
+<form class="form-inline" action="/profile/mybudgets/searchtransactions/category" method="GET">
   <div class="wrap-input">
     <label for="categorySelect"></label>
     <select class="form-control" name="category" id="categorySelect" required>
@@ -35,9 +37,9 @@ The dropdown menu shows only those categories you have used in your budget.
 </form>
 </p>
 
-<form class="form-inline" action="/mybudgets" method="GET">
+<form class="form-inline" action="/profile/mybudgets" method="GET">
   <div class="text-left mt-1">
-    <button type="submit" class="btn btn-secondary">Return to My Budgets</button>
+    <button type="submit" class="btn btn-secondary">Return to your budgets</button>
   </div>
 </form>
 

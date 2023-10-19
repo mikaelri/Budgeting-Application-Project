@@ -1,0 +1,63 @@
+{% extends "layout.html" %}
+{% block content %}
+
+{% if session.user_username %}
+<h2>Your personal page - {{ session.user_username }} </h2>
+{% endif %}
+
+<p>Welcome to your personal page!</p>
+
+{% if session.role %}
+<p>Your role is     
+  <b>
+  {% if session.role == 2 %}
+  Admin user
+  {% else %}
+  Regular user
+  {% endif %}
+  </b> 
+</p>
+
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    <div class="flash-messages">
+      {% for message in messages %}
+        <div class="alert alert-{{ message[1] }}"><b>{{ message }}</b></div>
+      {% endfor %}
+    </div>
+  {% endif %}
+{% endwith %}
+
+<p>In this page you can create your own budget, select to see your own budgets and after selection make changes or even delete them if you are admin user. 
+    Admin users can also see a list of all users.</p>
+
+<form action="/profile/newbudget" method="GET">
+  <div class="text-left">
+    <button type="submit" class="btn btn-secondary">Create a new budget</button>
+  </div>
+</form><br>
+
+<p>Click <b>"See all budgets"</b> to select which budget to add transactions, see net result or search transactions.</p>
+<form action="/profile/mybudgets" method="GET">
+  <div class="text-left">
+    <button type="submit" class="btn btn-secondary">See all budgets</button>
+  </div>
+</form><br>
+
+<p>To return to the front page, press <b>"Log out"</b> button.</p>
+<form action="/logout" method="GET">
+  <div class="text-left">
+    <button type="submit" class="btn btn-secondary">Log out</button>
+  </div>
+</form><br>
+
+<p>Click <b>"Admin page"</b> to see all of the users and their roles or to delete existing budget.</p>
+<form action="/profile/admin" method="GET">
+  <div class="text-left">
+    <button type="submit" class="btn btn-info">Admin page</button>
+  </div>
+</form><br>
+
+{% endif %}
+
+{% endblock %}

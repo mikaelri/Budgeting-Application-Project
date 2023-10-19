@@ -1,22 +1,18 @@
 {% extends "layout.html" %}
 {% block content %}
 
-{% if session.user_username %}
-<h2>Your personal page - {{ session.user_username }} </h2>
-{% endif %}
+<p>Welcome to SpendManager, your personal budgeting tool!</p>
+<p>This application is a good solution for individuals and groups. <br> 
+Use it for monthly income and expense analysis or create a budget for your holiday group and follow your spend.</p> 
 
-<p>Welcome to your personal page!</p>
+<p><b>This application provides functionalities to help you in budgeting, for example, you can easily:</b></p>
+<ul>
+    <li>create your own budgets
+    <li>add income & expense transactions by categories
+    <li>search transactions by category & word
+</ul>
 
-{% if session.role %}
-<p>Your role is     
-  <b>
-  {% if session.role == 2 %}
-  Admin user
-  {% else %}
-  Regular user
-  {% endif %}
-  </b> 
-</p>
+<p>To login, please fill your username and password and press <b>Login</b> button.</p>
 
 {% with messages = get_flashed_messages() %}
   {% if messages %}
@@ -28,36 +24,35 @@
   {% endif %}
 {% endwith %}
 
-<p>In this page you can create your own budget, select to see your own budgets and after selection make changes or even delete them if you are admin user. 
-    Admin users can also see a list of all users.</p>
+<form action="/login" method="POST">
+    <div class="form-group col-md-4">
+        <div class="row g-3 align-items-center">
+            <input type="text" class="form-control" name="username" placeholder="type your username" id="username">
+            <input type="password" class="form-control mt-1" name= "password1" placeholder="type your password" id="password1">
+        </div>
+    </div>
 
-<form action="/budget" method="GET">
-  <div class="text-left">
-    <button type="submit" class="btn btn-secondary">Create a new budget</button>
-  </div>
+    <div class="text-left">
+        <button type="submit" class="btn btn-secondary">Login</button>
+        <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+    </div>
+</form><br
+
+<p>Don't have an user account yet? No problem!</p> 
+<p>Create a new account just in seconds by following the instructions below.</p>
+
+<form action="/register" method="GET">
+    <div class="text-left">
+        <button type="submit" class="btn btn-secondary">Register a new user</button>
+    </div>
 </form><br>
 
-<p>Click <b>"See all budgets"</b> to select which budget to add transactions, see net result or search transactions.</p>
-<form action="/mybudgets" method="GET">
-  <div class="text-left">
-    <button type="submit" class="btn btn-secondary">See all budgets</button>
-  </div>
-</form><br>
-
-<p>To return to the front page, press <b>"Log out"</b> button.</p>
-<form action="/logout" method="GET">
-  <div class="text-left">
-    <button type="submit" class="btn btn-secondary">Log out</button>
-  </div>
-</form><br>
-
-<p>Click <b>"Admin page"</b> to see all of the users and their roles or to delete existing budget.</p>
-<form action="/admin" method="GET">
-  <div class="text-left">
-    <button type="submit" class="btn btn-info">Admin page</button>
-  </div>
-</form><br>
-
-{% endif %}
+<p><b>Why should I start using SpendManager?</b></p>
+<ul>
+    <li>application is free of charge
+    <li>bugeting made simple
+    <li>personal savings for the future
+    <li>much more - register now and try!
+</ul>
 
 {% endblock %}

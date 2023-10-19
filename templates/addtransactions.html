@@ -23,7 +23,7 @@
   {% endif %}
 {% endwith %}
 
-<form action="/transactions/{{ budget_id }}" method="POST">
+<form action="/profile/mybudgets/addtransactions/{{ budget_id }}" method="POST">
   <div class="form-group col-4 mt-3">
     <div class="row g-3 align-items-center">
       <input type="hidden" name="budget_id" value="{{ budget_id }}">
@@ -71,7 +71,7 @@
   </div>
 </form>
 
-<form class="form-inline" action="/mybudgets" method="GET">
+<form class="form-inline" action="/profile/mybudgets" method="GET">
   <div class="text-left mt-2">
     <button type="submit" class="btn btn-secondary">Return to my budgets</button>
   </div>

@@ -5,7 +5,7 @@
 
 Select in which budget you want to add income or expense transactions and click <b>"Add transactions"</b>.
 
-<form class="form-inline" action="/transactions" method="GET">
+<form class="form-inline" action="/profile/mybudgets/addtransactions" method="GET">
   <div class="wrap-input">
     <label for="budgetSelect"></label>
     <select class="form-control" name="budget_id" id="budgetSelect">
@@ -19,7 +19,7 @@ Select in which budget you want to add income or expense transactions and click 
 </form><br>
 
 If you want to calculate the net result of certain budget, click below.
-<form class="form-inline" action="/netresult" method="POST">
+<form class="form-inline" action="/profile/mybudgets/netresult" method="POST">
   <div class="wrap-input">
     <label for="budgetSelect"></label>
     <select class="form-control" name="budget_id" id="budgetSelect">
@@ -33,7 +33,8 @@ If you want to calculate the net result of certain budget, click below.
 </form><br>
 
 If you want to search transactions of certain budget, click below.
-<form class="form-inline" action="/usersearch" method="POST">
+
+<form class="form-inline" action="/profile/mybudgets/searchtransactions" method="POST">
   <div class="wrap-input">
     <label for="budgetSelect"></label>
     <select class="form-control" name="budget_id" id="budgetSelect">
@@ -47,7 +48,7 @@ If you want to search transactions of certain budget, click below.
 </form><br>
 
 Or return to your personal page.
-<form class="form-inline" action="/login" method="GET">
+<form class="form-inline" action="/profile" method="GET">
   <div class="text-left mt-1">
     <button type="submit" class="btn btn-secondary">Return to your page</button>
   </div>
