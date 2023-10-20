@@ -14,7 +14,8 @@
 {% endwith %}
 
 Select in which budget you want to add income or expense transactions and click <b>"Add transactions"</b>.
-<form class="form-inline" action="/profile/mybudgets/addtransactions" method="POST">
+<form class="form-inline" action="/profile/mybudgets/addtransactions" method="GET">
+
   <div class="wrap-input">
     <label for="budgetSelect"></label>
     <select class="form-control" name="budget_id" id="budgetSelect">
@@ -24,7 +25,6 @@ Select in which budget you want to add income or expense transactions and click 
     </select>
     <button type="submit" class="btn btn-secondary mt-1">Add transactions</button>
   </div>
-  <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
 </form><br>
 
 If you want to calculate the net result of certain budget, click below.

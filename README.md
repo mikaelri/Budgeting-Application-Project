@@ -1,24 +1,26 @@
-**SpendManager - Budgeting application project**
+**Python FLASK API - Budgeting application project**
+
+**SpendManager**
 
 ***Background***
 
-The idea of SpendManager application is that a user can create own budget, where it is possible to track income (i.e. salary, study grant) and expenses (i.e. rent, mortgage, electricity, groceries).
+The idea of SpendManager application is that a user can create own budget, where it is possible to track income (i.e. salary, study grant) and expenses (i.e. rent, groceries).
 
 One example for the use case is that user can create an individual budget and to follow monthly income and expenses to see what is the net result for the month. 
 
-The application will use a ready-to-use categories for income and expenses. This is for the reason that it helps the user to group, sort and search transactions. The category groups for income and expenses are:
+The application will use a ready-to-use categories for income and expenses. This is for the reason that it helps the user to search transactions. The category groups for income and expenses are:
 
-- **Income:** *Salary, Study grant, Miscellanous income*
-- **Expenses:** *Rent, Mortgage, Interest for mortgage, Travel, Groceries, Restaurant & Food,  Miscellanous expenses*
+- **Income:** *salary, study grant & other*
+- **Expenses:** *rent, mortgage, travel, groceries, food & other*
 
-Miscellanous expenses could be i.e. Mobile phone bill, membership fees or electricity. The idea is that the user can add any income or expense even if there is not a category for this. If there is no category the user can write a message related to the expense.
+The idea for category "other" is that the user can add any income or expense transaction even if there is not a category for this. If there is no category the user can write a message related to the transaction.
 
-Please note this is not the only use case for the application. The application could be used also only for expenses, thus, one other example could be a holiday trip for some group. This application could help to track down the fixed costs already known or something to add during the trip such as flight, hotel, activity costs.
+The application could be used also only for expenses, thus, one other example could be a holiday trip for some group. This application could help to track down the fixed costs already known such as flight and hotel or something to add during the trip like activity costs.
 
 ***Application functionalities*** 
 
-- **Functionalities 1,2,3,4,5,6,7,8 are ready for testing**
-- **Functionalities 9,10 are not ready for testing**
+- **Functionalities 1,2,3,4,5,6,7,8, 9 are ready for testing**
+- **Functionalities 10 are not ready for testing**
 
 1. User can log in and out and create a new user account
 2. User can view a list of own individual budgets after logging in (only if at least one exists)
@@ -26,10 +28,10 @@ Please note this is not the only use case for the application. The application c
 4. User can create a new budget and add a name for it
 5. User can continously add income and expense transactions to selected budget with a message and category
 6. User can view the net result of the selected budget
-7. Admin user can see a list of user accounts, roles and budgets
-8. Admin user can delete existing budgets
-9. ~~User can leave comments to selected budgets~~
-10. ~~User can search income and expenses related to specific category (i.e. Salary or Rent)~~
+7. User can search income and expenses related to selected category 
+8. Admin user can see a list of user accounts, roles and budgets
+9. Admin user can delete existing budgets
+10. ~~User can leave comments to selected budgets~~
 
 ***Database tables***
 
@@ -68,12 +70,19 @@ pip install -r ./requirements.txt
 ```
 psql < schema.sql
 ```
-**5. If the previous  command gives connection error, you can first activate database session and re run previous command in a new terminal windon (however this propably is not needed):**
-```
-start-pg.sh
-```
-**6. Start the application with command:**
+
+**5. Start the application with command:**
 
 ```
 flask run
 ```
+
+***Possible future enhancements and ideas***
+
+- Upgrade the front-end and make it visually more clear 
+  
+- Upgrade the UX with better navigation possibilities (this in link with point 2. above) and consider changes for the application to be more user friendly
+  
+- Modify the admin page table so it would show who is the creator for certain budget (i.e. dropdown) or make a double check asking if you really want to delete a budget from a selected user
+  
+- Add view, which would provide a better look for the user to see inside the budget (i.e. different functions to show more details of the budget, not only net result)
