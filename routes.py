@@ -187,7 +187,7 @@ def add_new_transactions():
     #check that the session creator is the creator of the budget
     creator_id = session.get("user_id")
     if selected_budget.creator_id != creator_id:
-        flash("Error, please use the budgets you have created")
+        flash("Error, no budget with that id exists.")
         return redirect("/profile/mybudgets")
     
     if request.method == "POST":
