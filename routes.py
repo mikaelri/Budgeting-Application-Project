@@ -162,14 +162,6 @@ def view_budgets():
     creator_id = session.get("user_id")
     budgets_list = budgets.see_budgets(creator_id)
 
-    #store the budget_id in session for GET or POST
-    if 'budget_id' in request.args:
-        budget_id = request.args.get('budget_id')
-        session['budget_id'] = budget_id
-    elif 'budget_id' in request.form:
-        budget_id = request.form['budget_id']
-        session['budget_id'] = budget_id
-
     if len(budgets_list) < 1:
         return render_template("error_transactions.html", 
                                message_transactions="No budgets created yet. Please add a budget.")
@@ -179,6 +171,14 @@ def view_budgets():
 @app.route("/profile/mybudgets/addtransactions", methods=["GET", "POST"])
 def add_new_transactions():
     """add transactions to a selected budget"""   
+
+    #store the budget_id in session for GET or POST
+    if 'budget_id' in request.args:
+        budget_id = request.args.get('budget_id')
+        session['budget_id'] = budget_id
+    elif 'budget_id' in request.form:
+        budget_id = request.form['budget_id']
+        session['budget_id'] = budget_id
      
     #get the budget id from session and select it for front-end in html view
     budget_id = session.get("budget_id")
