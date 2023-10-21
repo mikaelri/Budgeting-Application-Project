@@ -22,6 +22,6 @@ def validate_fields(income, expense, income_category, expense_category):
         return False, "Failed to add transaction. The entered amount exceeds the maximum limit of 2 147 483 647."
     
     elif (income and not income_category) or (expense and not expense_category):
-        return False, "Failed to submit the transaction, please select income or expense and related category."
+        return False, "Failed to submit the transaction, please select income and/or expense and related category."
     
     return True, ""
