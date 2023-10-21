@@ -23,13 +23,13 @@ The application could be used also only for expenses, thus, one other example co
 All of the functionalities below have been implemented for the project.
 
 - User can create a new user account and log in and out
-- User can create a new budget and add a name for it
+- User can create a new budget and add name for it
 - User can see a list of own individual budgets
 - User can select which budgets to modify from the list of budgets
 - User can add income and expense transactions to selected budget with a message and category
 - User can view the net result of the selected budget
-- User can search income and expenses related to selected category 
-- Admin user can see a list of user accounts and roles 
+- User can search income and expenses related to selected category and budget
+- Admin user can see a list of all user accounts and roles 
 - Admin user can delete existing budgets
 
 ***Database tables***
@@ -38,6 +38,16 @@ All of the functionalities below have been implemented for the project.
 2. budgets
 3. transactions
 4. results
+
+***Possible future enhancements***
+
+- Add a view, which would provide a better look for the user to see inside the budget, i.e. different functions to show more details of the budget, not only net result. This could be a dynamic table, where the user could filter transactions.
+
+- Modify the admin page so it would show who is the creator for certain budget, i.e. dropdown for the table.
+
+- Upgrade the UX with better navigation possibilities and consider changes for the application to be more user friendly
+
+- Upgrade the front-end and make it visually more clear.
 
 ***Installing instructions / how to test the app locally***
 ```
@@ -74,14 +84,4 @@ psql < schema.sql
 ```
 flask run
 ```
-
-***Possible future enhancements***
-
-- Add a view, which would provide a better look for the user to see inside the budget, i.e. different functions to show more details of the budget, not only net result. This could be a dynamic table, where the user could filter transactions.
-
-- Modify the admin page so it would show who is the creator for certain budget, i.e. dropdown for the table.
-
-- Upgrade the UX with better navigation possibilities and consider changes for the application to be more user friendly
-
-- Upgrade the front-end and make it visually more clear.
 
