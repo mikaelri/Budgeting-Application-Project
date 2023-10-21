@@ -13,7 +13,7 @@ def process_fields(income, expense, income_category, expense_category, message):
 def validate_fields(income, expense, income_category, expense_category):
     # Function to validate fields in the add transaction form
     if not income and not expense:
-        return False, "Failed to add transaction. Income or expense has to be added."
+        return False, "Failed to add transaction. Income or expense and related categories has to be added."
 
     elif (income and float(income) < 0) or (expense and float(expense) < 0):
         return False, "Failed to add transaction. Negative values cannot be used."
