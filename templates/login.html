@@ -3,16 +3,16 @@
 
 <p>Welcome to SpendManager, your personal budgeting tool!</p>
 <p>This application is a good solution for individuals and groups. <br> 
-Use it for monthly income and expense analysis or create a budget for your holiday group and follow your spend.</p> 
+Use it for monthly spend tracking or create a budget for your holiday group.</p> 
 
-<p><b>This application provides functionalities to help you in budgeting, for example, you can easily:</b></p>
+<p><b>This application provides functionalities to help you in budgeting, for example, you can:</b></p>
 <ul>
-    <li>create your own budgets
     <li>add income & expense transactions by categories
+    <li>add message to transactions
     <li>search transactions by category
 </ul>
 
-<p>To login, please fill your username and password and press <b>Login</b> button.</p>
+<p>To login, please fill your username and password and hit that <b>Login</b> button.</p>
 
 {% with messages = get_flashed_messages() %}
   {% if messages %}
@@ -37,8 +37,7 @@ Use it for monthly income and expense analysis or create a budget for your holid
     </div>
 </form><br
 
-<p>Don't have an user account yet? No problem!</p> 
-<p>Create a new account just in seconds by following the instructions below.</p>
+<p>Don't have an user account yet? No problem, just follow the instructions below and create one!</p> 
 
 <form action="/register" method="GET">
     <div class="text-left">

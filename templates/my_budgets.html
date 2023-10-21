@@ -13,7 +13,9 @@
   {% endif %}
 {% endwith %}
 
-Select in which budget you want to add income or expense transactions and click <b>"Add transactions"</b>.
+<p>This page has the functionalities for your own budgets.</p>
+
+To add transactions to existing budget select a budget below.
 <form class="form-inline" action="/profile/mybudgets/addtransactions" method="GET">
 
   <div class="wrap-input">
@@ -27,7 +29,7 @@ Select in which budget you want to add income or expense transactions and click 
   </div>
 </form><br>
 
-If you want to calculate the net result of certain budget, click below.
+To calculate the net result, select a budget below.
 <form class="form-inline" action="/profile/mybudgets/netresult" method="POST">
   <div class="wrap-input">
     <label for="budgetSelect"></label>
@@ -41,8 +43,7 @@ If you want to calculate the net result of certain budget, click below.
   <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
 </form><br>
 
-If you want to search transactions of certain budget, click below.
-
+To search transactions by category, select a budget below.
 <form class="form-inline" action="/profile/mybudgets/searchtransactions" method="POST">
   <div class="wrap-input">
     <label for="budgetSelect"></label>

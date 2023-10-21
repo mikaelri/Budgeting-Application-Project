@@ -1,4 +1,4 @@
-**Python FLASK API - Budgeting application project**
+**Python FLASK Project - Budgeting Application**
 
 **SpendManager**
 
@@ -8,7 +8,8 @@ The idea of SpendManager application is that a user can create own budget, where
 
 One example for the use case is that user can create an individual budget and to follow monthly income and expenses to see what is the net result for the month. 
 
-The application will use a ready-to-use categories for income and expenses. This is for the reason that it helps the user to search transactions. The category groups for income and expenses are:
+The application has a ready-to-use categories for income and expenses. This is for the reason that it helps the user to search transactions. 
+The category groups for income and expenses are:
 
 - **Income:** *salary, study grant & other*
 - **Expenses:** *rent, mortgage, travel, groceries, food & other*
@@ -19,19 +20,17 @@ The application could be used also only for expenses, thus, one other example co
 
 ***Application functionalities*** 
 
-- **Functionalities 1,2,3,4,5,6,7,8, 9 are ready for testing**
-- **Functionalities 10 are not ready for testing**
+All of the functionalities below have been implemented for the project.
 
-1. User can log in and out and create a new user account
-2. User can view a list of own individual budgets after logging in (only if at least one exists)
-3. User can select which budgets to modify from the list of budgets
-4. User can create a new budget and add a name for it
-5. User can continously add income and expense transactions to selected budget with a message and category
-6. User can view the net result of the selected budget
-7. User can search income and expenses related to selected category 
-8. Admin user can see a list of user accounts, roles and budgets
-9. Admin user can delete existing budgets
-10. ~~User can leave comments to selected budgets~~
+- User can log in and out and create a new user account
+- User can create a new budget and add a name for it
+- User can see a list of own individual budgets
+- User can select which budgets to modify from the list of budgets
+- User can add income and expense transactions to selected budget with a message and category
+- User can view the net result of the selected budget
+- User can search income and expenses related to selected category 
+- Admin user can see a list of user accounts and roles 
+- Admin user can delete existing budgets
 
 ***Database tables***
 
@@ -39,7 +38,6 @@ The application could be used also only for expenses, thus, one other example co
 2. budgets
 3. transactions
 4. results
-5. comments
 
 ***Installing instructions / how to test the app locally***
 ```
@@ -77,12 +75,13 @@ psql < schema.sql
 flask run
 ```
 
-***Possible future enhancements and ideas***
+***Possible future enhancements***
 
-- Upgrade the front-end and make it visually more clear 
-  
-- Upgrade the UX with better navigation possibilities (this in link with point 2. above) and consider changes for the application to be more user friendly
-  
-- Modify the admin page table so it would show who is the creator for certain budget (i.e. dropdown) or make a double check asking if you really want to delete a budget from a selected user
-  
-- Add view, which would provide a better look for the user to see inside the budget (i.e. different functions to show more details of the budget, not only net result)
+- Add a view, which would provide a better look for the user to see inside the budget, i.e. different functions to show more details of the budget, not only net result. This could be a dynamic table, where the user could filter transactions.
+
+- Modify the admin page so it would show who is the creator for certain budget, i.e. dropdown for the table.
+
+- Upgrade the UX with better navigation possibilities and consider changes for the application to be more user friendly
+
+- Upgrade the front-end and make it visually more clear.
+

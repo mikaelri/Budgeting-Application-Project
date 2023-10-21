@@ -1,9 +1,14 @@
-"""module app to run the app.py file and flask used to handle the routing of the application"""
-from flask import render_template, redirect, request, session, flash, url_for
+"""Module for endpoint routing and back-end process"""
+from flask import render_template, redirect, request, session, flash
 from app import app
-import users, budgets, user_budgets, category_search, services.budget_service, services.user_service
+import users
+import budgets
+import user_budgets
+import category_search
+import services.budget_service
+import services.user_service
 
-@app.route('/')
+@app.route("/")
 def index():
     """Function routing to login page"""
     return redirect("/login")
@@ -65,7 +70,7 @@ def login():
     if not users.login(username, password):
         return render_template("error.html", message="Wrong username, password or no user created.")
 
-    """store the user role and creator_id in session if the login was succesful"""
+    # Store the user role and creator_id in session if the login was succesful
     user_id = session.get("user_id")
     user_role = users.get_user_role(user_id)
     session["creator_id"] = user_id
@@ -82,7 +87,7 @@ def logout():
 
 @app.route("/profile", methods=["GET"])
 def profile():
-    """function to view the profile page"""
+    """Function to view the profile page"""
     return render_template("profile.html")
 
 @app.route("/profile/admin", methods=["GET", "POST"])
@@ -99,7 +104,7 @@ def admin_list():
             flash("Access denied. The page is only for admin users.", "error")
             return redirect("/profile")
            
-    """Remove existing budget if exists"""
+    # Remove existing budget
     if request.method == "POST":
         services.user_service.require_role(2)
         services.user_service.check_csrf()
@@ -116,7 +121,8 @@ def admin_list():
 
         success = user_budgets.delete_budget(budget_id)
         if success:
-            flash (f"Budget was removed successfully! You deleted a budget from username {creator_name}", "success") 
+            flash (f"""Budget was removed successfully! You deleted a budget from 
+                   username {creator_name}""", "success") 
             return redirect("/profile/admin")     
         else:
             flash ("Failed to delete the budget, try again.", "error")  
@@ -124,7 +130,7 @@ def admin_list():
 
 @app.route("/profile/newbudget", methods=["GET", "POST"])
 def create_new_budget():
-    """function handling to create a new budget"""
+    """Function handling to create a new budget"""
     if request.method == "GET":
         return render_template("new_budget.html")
 
@@ -158,38 +164,39 @@ def create_new_budget():
 
 @app.route("/profile/mybudgets", methods=["GET"])
 def view_budgets():
-    """function to view all personal budgets"""
+    """Function to view all personal budgets"""
     creator_id = session.get("user_id")
     budgets_list = budgets.see_budgets(creator_id)
 
     if len(budgets_list) < 1:
-        return render_template("error_transactions.html", 
-                               message_transactions="No budgets created yet. Please add a budget.")
+        return render_template("error_budgets.html", 
+                               message_budgets="No budgets created yet. Please add a budget first.")
             
     return render_template("my_budgets.html", budgets=budgets_list)
 
 @app.route("/profile/mybudgets/addtransactions", methods=["GET", "POST"])
 def add_new_transactions():
-    """add transactions to a selected budget"""   
+    """Add transactions to a selected budget"""   
 
-    #store the budget_id in session for GET or POST
-    if 'budget_id' in request.args:
-        budget_id = request.args.get('budget_id')
-        session['budget_id'] = budget_id
-    elif 'budget_id' in request.form:
-        budget_id = request.form['budget_id']
-        session['budget_id'] = budget_id
+    # Store the budget_id in session for GET or POST
+    if "budget_id" in request.args:
+        budget_id = request.args.get("budget_id")
+        session["budget_id"] = budget_id
+    elif "budget_id" in request.form:
+        budget_id = request.form["budget_id"]
+        session["budget_id"] = budget_id
      
-    #get the budget id from session and select it for front-end in html view
+    # Get the budget id from session and select it for front-end and creator_id check below
     budget_id = session.get("budget_id")
     selected_budget = budgets.get_budget_id(budget_id)
-
-    #check that the session creator is the creator of the budget
-    creator_id = session.get("user_id")
-    if selected_budget.creator_id != creator_id:
-        flash("Error, no budget with that id exists.")
-        return redirect("/profile/mybudgets")
     
+    # Check that session creator is the creator of the budget to prevent checking other 
+    # peoples budgets
+    creator_id = session.get("user_id")
+    if selected_budget is None or selected_budget.creator_id != creator_id:
+        flash("Invalid Request: The information you are trying to access is not available.")
+        return redirect("/profile/mybudgets")
+
     if request.method == "POST":
         services.user_service.check_csrf()
 
@@ -199,14 +206,14 @@ def add_new_transactions():
         expense_category = request.form["expense_category"]
         message = request.form.get("message") 
        
-        #process the add transaction form so that all necessary fields are added
+        # Process the add transaction form so that all necessary fields are added
         is_valid, error_message = services.budget_service.validate_fields(income, expense, 
                                     income_category, expense_category)
         if not is_valid:
             flash(error_message, "error")
             return redirect(f"/profile/mybudgets/addtransactions?budget_id={budget_id}")
                 
-        # add the transaction if all of the mandatory fields where added
+        # Add the transaction if all of the mandatory fields where added
         if user_budgets.add_transaction(budget_id, income, expense, income_category, 
                                        expense_category, message):
             flash("Transaction added succesfully!", "success")
@@ -216,22 +223,28 @@ def add_new_transactions():
 
 @app.route("/profile/mybudgets/netresult", methods=["POST"])
 def view_net_result():
-    """function to show the net result for selected budget"""
+    """Function to show the net result for selected budget"""
     services.user_service.check_csrf()
     budget_id = request.form.get("budget_id")
     select_budget = budgets.get_budget_id(budget_id)
     net_result = user_budgets.calculate_net_result(budget_id)
 
+    total_income = user_budgets.get_total_income(budget_id)
+    total_expense = user_budgets.get_total_expense(budget_id)
+
     return render_template("net_result.html", 
-                           selected_budget=select_budget, budget_id=budget_id, 
-                           net_result=net_result)
+                           selected_budget=select_budget, 
+                           budget_id=budget_id, 
+                           net_result=net_result, 
+                           total_income=total_income, 
+                           total_expense=total_expense)
 
 @app.route("/profile/mybudgets/searchtransactions", methods= ["POST"])
 def route_search():
     """Routes to category search page and functionalities""" 
     services.user_service.check_csrf()
-    budget_id = request.form.get('budget_id')
-    session['budget_id'] = budget_id
+    budget_id = request.form.get("budget_id")
+    session["budget_id"] = budget_id
 
     income_category = category_search.view_income_category(budget_id)
     expense_category = category_search.view_expense_category(budget_id)
@@ -239,21 +252,29 @@ def route_search():
     select_budget = budgets.get_budget_id(budget_id)
 
     return render_template("search_transactions.html", 
-                        selected_budget=select_budget, budget_id=budget_id, 
-                        income_category=income_category, expense_category=expense_category)
+                            selected_budget=select_budget, 
+                            budget_id=budget_id, 
+                            income_category=income_category, 
+                            expense_category=expense_category)
 
 
 @app.route("/profile/mybudgets/searchtransactions/category", methods= ["GET"])
-def search_transactions():
+def search_category():
     """Routes to categorylisting page and shows the transactions for selected category"""
-    budget_id = session.get('budget_id')
+    budget_id = session.get("budget_id")
     category = request.args.get("category")
     select_budget = budgets.get_budget_id(budget_id)
 
+    totals=category_search.get_category_totals(budget_id, category)
+
     if category:
         transactions = category_search.search_by_category(budget_id, category)
-        return render_template("category.html", transactions=transactions, 
-                               selected_budget=select_budget, category=category)
+        return render_template("category.html", 
+                                transactions=transactions, 
+                                selected_budget=select_budget, 
+                                category=category, 
+                                total_income=totals["total_income"], 
+                                total_expense=totals["total_expense"])
     
 
 

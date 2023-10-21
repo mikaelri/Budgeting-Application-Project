@@ -1,6 +1,6 @@
+"""Module to support creating a new user and security checks"""
 from flask import abort, request, session
 
-"""user services"""
 def user_id():
     return session.get("user_id", 0)
 

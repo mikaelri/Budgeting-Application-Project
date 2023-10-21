@@ -1,6 +1,7 @@
-"""service function for sql query"""
+"""Module to support exception situations for other modules functions"""
+
 def process_fields(income, expense, income_category, expense_category, message):
-    """function to process and validate transaction fields"""
+    # Function to process and validate transaction fields in SQL query
     income = 0 if not income or income.strip() == "" else income
     expense = 0 if not expense or expense.strip() == "" else expense
     income_category = "Not selected" if not income_category or income_category.strip() == "" else income_category
@@ -10,10 +11,10 @@ def process_fields(income, expense, income_category, expense_category, message):
     return income, expense, income_category, expense_category, message
 
 def validate_fields(income, expense, income_category, expense_category):
-    """function to validate fields in the add transaction form."""
+    # Function to validate fields in the add transaction form
     if not income and not expense:
         return False, "Failed to submit the transaction, either income or expense has to be added."
-    
+
     elif (income and float(income) < 0) or (expense and float(expense) < 0):
         return False, "Negative values cannot be used when adding transactions."
     

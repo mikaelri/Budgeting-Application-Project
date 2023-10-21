@@ -1,4 +1,4 @@
-"""module os for database url fetching, app to run the app and sql for DB creation"""
+""" Module os for database url fetching, app to run the app and sql for DB creation"""
 from flask import Flask
 from os import getenv
 from app import app

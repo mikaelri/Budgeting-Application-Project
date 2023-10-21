@@ -2,7 +2,6 @@ DROP TABLE IF EXISTS users CASCADE;
 DROP TABLE IF EXISTS budgets CASCADE;
 DROP TABLE IF EXISTS transactions CASCADE;
 DROP TABLE IF EXISTS results CASCADE;
-DROP TABLE IF EXISTS comments CASCADE;
 
 CREATE TABLE IF NOT EXISTS users (
     id SERIAL PRIMARY KEY,
@@ -32,10 +31,4 @@ CREATE TABLE IF NOT EXISTS results (
     total_income BIGINT,
     total_expense BIGINT,
     net_result BIGINT
-);
-
-CREATE TABLE IF NOT EXISTS comments (
-    id SERIAL PRIMARY KEY,
-    comment_id INTEGER REFERENCES budgets(id),
-    comment TEXT
 );

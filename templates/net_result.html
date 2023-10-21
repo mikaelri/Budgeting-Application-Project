@@ -5,10 +5,15 @@
 
 <h2>Net result - {{ selected_budget.name }} budget</h2>
 
-<p> Net result for selected budget: {{ net_result }}</p>
+<p> Total income: {{ total_income }}</p>
+<p> Total expense: {{ total_expense }}</p>
+<p> <b>Net result:</b> {{ net_result }}</p>
 {% else %}
   <p>No budget selected.</p>
 {% endif %}
+
+If you want to understand better where the income and expense is formed use the<br>
+search transactions functionality from your budgets view.
 
 <form class="form-inline" action="/profile/mybudgets" method="GET">
   <div class="text-left mt-1">
