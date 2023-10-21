@@ -22,7 +22,9 @@
   <ul>
     <li>creating up to 5 personal budgets
     <li>your budgets view
+    {% if session.role == 2 %}
     <li>admin user view if you have the rights
+    {% endif %}
 </ul>
 
 {% with messages = get_flashed_messages() %}
