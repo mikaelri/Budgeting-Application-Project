@@ -5,6 +5,16 @@
 <h2>Your personal page - {{ session.user_username }} </h2>
 {% endif %}
 
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    <div class="flash-messages">
+      {% for message in messages %}
+        <div class="alert alert-{{ message[1] }}"><b>{{ message }}</b></div>
+      {% endfor %}
+    </div>
+  {% endif %}
+{% endwith %}
+
 <p>Welcome to your personal page!</p>
 
 {% if session.role %}
@@ -26,17 +36,9 @@
     <li>admin user view if you have the rights
     {% endif %}
 </ul>
-
-{% with messages = get_flashed_messages() %}
-  {% if messages %}
-    <div class="flash-messages">
-      {% for message in messages %}
-        <div class="alert alert-{{ message[1] }}"><b>{{ message }}</b></div>
-      {% endfor %}
-    </div>
-  {% endif %}
-{% endwith %}
   
+<p>Click below and create a new budget.</p>
+
 <form action="/profile/newbudget" method="GET">
   <div class="text-left">
     <button type="submit" class="btn btn-secondary">Create a new budget</button>
