@@ -22,7 +22,7 @@ The application could be used also only for expenses, thus, one other example co
 
 All of the functionalities below have been implemented for the project.
 
-- User can log in and out and create a new user account
+- User can create a new user account and log in and out
 - User can create a new budget and add a name for it
 - User can see a list of own individual budgets
 - User can select which budgets to modify from the list of budgets
