@@ -52,6 +52,10 @@ Prerequisites: Python 3.10.12 and PostgreSQL.
 ```
 **1. Clone this repository to your computer and navigate to the root folder.**
 
+```
+git clone https://github.com/mikaelri/Budgeting-Application-Project.git
+```
+
 **2. Create .env file to the folder and add these:**
 ```
 DATABASE_URL=<database-local-address> (I have: postgresql:///user)
