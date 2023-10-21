@@ -42,11 +42,8 @@ All of the functionalities below have been implemented for the project.
 ***Possible future enhancements***
 
 - Add a view, which would provide a better look for the user to see inside the budget, i.e. different functions to show more details of the budget, not only net result. This could be a dynamic table, where the user could filter transactions.
-
 - Modify the admin page so it would show who is the creator for certain budget, i.e. dropdown for the table.
-
-- Upgrade the UX with better navigation possibilities and consider changes for the application to be more user friendly
-
+- Upgrade the UX with better navigation possibilities and consider changes for the application to be more user friendly.
 - Upgrade the front-end and make it visually more clear.
 
 ***Installing instructions / how to test the app locally***
